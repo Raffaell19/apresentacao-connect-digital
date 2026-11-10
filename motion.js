@@ -173,17 +173,49 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (sceneNumber === 3) {
-      // Mosaico dinâmico dos 4 nichos
-      gsap.fromTo('.mosaic-card', 
-        { scale: 0.85, opacity: 0, y: 30 }, 
-        { scale: 1, opacity: 1, y: 0, stagger: 0.2, duration: 0.6, ease: 'power3.out' }
+      // Feed do Instagram em Smartphone com rolagem fluida e pausas naturais
+      gsap.fromTo('#scene3 .phone-frame', 
+        { scale: 0.94, opacity: 0, y: 25 }, 
+        { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
       );
+
+      const feedTrack = document.getElementById('instaFeedTrack');
+      if (feedTrack) {
+        gsap.killTweensOf(feedTrack);
+        gsap.set(feedTrack, { y: 0 });
+
+        const instaTl = gsap.timeline({ delay: 0.8 });
+        // Transição para o Post 2 (Restaurante Rancho da Âncora)
+        instaTl.to(feedTrack, { y: -290, duration: 1.6, ease: 'power2.inOut' }, "+=1.2")
+        // Transição para o Post 3 (Terra Verde Jardinagem)
+               .to(feedTrack, { y: -580, duration: 1.6, ease: 'power2.inOut' }, "+=1.4")
+        // Transição para o Post 4 (Alves Instaladora Elétrica 24h)
+               .to(feedTrack, { y: -870, duration: 1.6, ease: 'power2.inOut' }, "+=1.4");
+      }
     }
 
     if (sceneNumber === 4) {
-      // Browser viewport revelando a landing page em 0.8s
-      gsap.fromTo('.browser-viewport', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' });
-      gsap.fromTo('.site-sim-floating-wa', { scale: 0 }, { scale: 1, delay: 0.7, duration: 0.5, ease: 'back.out(2)' });
+      // Landing Page em Smartphone Mobile First rolando a estrutura completa
+      gsap.fromTo('#scene4 .phone-frame', 
+        { scale: 0.94, opacity: 0, y: 25 }, 
+        { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+      );
+      gsap.fromTo('.lp-phone-floating-wa', 
+        { scale: 0 }, 
+        { scale: 1, delay: 0.6, duration: 0.4, ease: 'back.out(2)' }
+      );
+
+      const lpTrack = document.getElementById('lpScrollTrack');
+      if (lpTrack) {
+        gsap.killTweensOf(lpTrack);
+        gsap.set(lpTrack, { y: 0 });
+
+        const lpTl = gsap.timeline({ delay: 0.9 });
+        // Rola revelando Provas Sociais e Abas de Tratamentos
+        lpTl.to(lpTrack, { y: -190, duration: 2.0, ease: 'power2.inOut' }, "+=1.6")
+        // Rola revelando Formulário VIP e CTA do WhatsApp
+            .to(lpTrack, { y: -380, duration: 2.2, ease: 'power2.inOut' }, "+=2.0");
+      }
     }
 
     if (sceneNumber === 5) {
