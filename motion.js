@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sceneNumber === 3) {
       // Feed do Instagram em Smartphone com rolagem fluida e pausas naturais
       gsap.fromTo('#scene3 .phone-frame', 
-        { scale: 0.94, opacity: 0, y: 25 }, 
+        { scale: 0.94, opacity: 0, y: 15 }, 
         { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
       );
 
@@ -201,18 +201,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const instaTl = gsap.timeline({ delay: 0.8 });
         // Transição para o Post 2 (Restaurante Rancho da Âncora)
-        instaTl.to(feedTrack, { y: -290, duration: 1.6, ease: 'power2.inOut' }, "+=1.2")
+        instaTl.to(feedTrack, { y: -210, duration: 1.5, ease: 'power2.inOut' }, "+=1.2")
         // Transição para o Post 3 (Terra Verde Jardinagem)
-               .to(feedTrack, { y: -580, duration: 1.6, ease: 'power2.inOut' }, "+=1.4")
+               .to(feedTrack, { y: -420, duration: 1.5, ease: 'power2.inOut' }, "+=1.4")
         // Transição para o Post 4 (Alves Instaladora Elétrica 24h)
-               .to(feedTrack, { y: -870, duration: 1.6, ease: 'power2.inOut' }, "+=1.4");
+               .to(feedTrack, { y: -630, duration: 1.5, ease: 'power2.inOut' }, "+=1.4");
       }
     }
 
     if (sceneNumber === 4) {
       // Landing Page em Smartphone Mobile First rolando a estrutura completa
       gsap.fromTo('#scene4 .phone-frame', 
-        { scale: 0.94, opacity: 0, y: 25 }, 
+        { scale: 0.94, opacity: 0, y: 15 }, 
         { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
       );
       gsap.fromTo('.lp-phone-floating-wa', 
@@ -272,9 +272,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const lpTl = gsap.timeline({ delay: 0.8 });
         // Rola revelando Provas Sociais e Abas de Tratamentos (2.2s)
-        lpTl.to(lpTrack, { y: -210, duration: 1.8, ease: 'power2.inOut' }, "+=1.4")
+        lpTl.to(lpTrack, { y: -140, duration: 1.6, ease: 'power2.inOut' }, "+=1.4")
         // Rola centralizando o Formulário VIP de Alta Conversão na tela (5.0s)
-            .to(lpTrack, { y: -460, duration: 2.0, ease: 'power2.inOut' }, "+=1.4");
+            .to(lpTrack, { y: -290, duration: 1.8, ease: 'power2.inOut' }, "+=1.4");
       }
 
       // Função de Digitação com Cursor Interativo
