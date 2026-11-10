@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Connect Digital | Apresentação Estratégica Motion Graphics (16:9)</title>
+  <meta name="description" content="Apresentação institucional e comercial em Motion Graphics 16:9 da Connect Digital: como atrair clientes qualificados no Google e Redes Sociais para prestadores de serviços.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/favicon-96x96.png">
+  
+  <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- GSAP Animation Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- PALCO PRINCIPAL (CONTAINER 16:9 FULLSCREEN FIT) -->
+  <div class="stage-wrapper" id="stageWrapper">
+    <div class="stage-canvas" id="stageCanvas">
+      
+      <!-- BACKGROUND DINÂMICO TECH (CYAN & DEEP BLUE) -->
+      <div class="stage-bg">
+        <div class="tech-grid"></div>
+        <div class="glow-orb orb-primary"></div>
+        <div class="glow-orb orb-secondary"></div>
+      </div>
+
+      <!-- WATERMARK / BRANDING PERMANENTE NO CANTO -->
+      <header class="stage-header">
+        <div class="brand-badge">
+          <svg class="brand-icon" viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="38" stroke="#00B4FF" stroke-width="2" stroke-dasharray="4 3"/>
+            <circle cx="40" cy="40" r="28" stroke="#00B4FF" stroke-width="1" opacity="0.4"/>
+            <path d="M20 40 C20 29 29 20 40 20 C51 20 58 27 58 36 C58 44 52 50 44 50 C38 50 34 46 34 40 C34 35 37 31 42 31 C46 31 49 34 49 38 C49 43 45 47 40 47 C35 47 31 43 31 38" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <circle cx="20" cy="40" r="4" fill="#00B4FF"/>
+            <circle cx="40" cy="20" r="4" fill="#00B4FF"/>
+            <circle cx="60" cy="40" r="4" fill="#00B4FF"/>
+            <circle cx="40" cy="60" r="4" fill="#00B4FF"/>
+          </svg>
+          <div class="brand-text">
+            <span class="brand-name">CONNECT DIGITAL</span>
+            <span class="brand-sub">ESTRATÉGIA &amp; PERFORMANCE</span>
+          </div>
+        </div>
+
+        <div class="scene-indicator" id="sceneIndicator">
+          <span class="scene-badge" id="sceneBadge">CENA 01 / 06</span>
+          <span class="scene-title-tag" id="sceneTitleTag">O Diagnóstico dos Prestadores</span>
+        </div>
+      </header>
+
+      <!-- ======================================================================
+           CENA 1: O DIAGNÓSTICO DOS PRESTADORES DE SERVIÇOS (0s - 17s)
+           ====================================================================== -->
+      <section class="scene-panel" id="scene1">
+        <div class="scene-split">
+          
+          <div class="scene-col-left">
+            <div class="callout-tag">
+              <span class="tag-pulse"></span>
+              <span>Mercado de Prestação de Serviços</span>
+            </div>
+            
+            <h1 class="motion-title">
+              Você ainda depende do <span class="highlight-red">Boca a Boca</span> para fechar novos clientes?
+            </h1>
+
+            <p class="motion-desc">
+              Enquanto sua empresa espera o telefone tocar por indicação, milhares de clientes com necessidade imediata estão pesquisando agora mesmo no Google e nas Redes Sociais.
+            </p>
+
+            <!-- Cards dos 4 Nichos Foco -->
+            <div class="niches-mosaic-mini">
+              <div class="niche-chip active-chip">
+                <span class="niche-icon">🦷</span>
+                <span>Clínicas Odontológicas</span>
+              </div>
+              <div class="niche-chip active-chip">
+                <span class="niche-icon">⚡</span>
+                <span>Eletricistas &amp; Instaladores</span>
+              </div>
+              <div class="niche-chip active-chip">
+                <span class="niche-icon">🌿</span>
+                <span>Jardinagem &amp; Paisagismo</span>
+              </div>
+              <div class="niche-chip active-chip">
+                <span class="niche-icon">🍽️</span>
+                <span>Restaurantes &amp; Gastronomia</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="scene-col-right">
+            <!-- Gráfico Comparativo Animado -->
+            <div class="comparison-card">
+              <div class="card-header-bar">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="card-bar-title">Diagnóstico de Captação Regional</span>
+              </div>
+              
+              <div class="comparison-body">
+                <div class="comp-item danger">
+                  <div class="comp-label">
+                    <span>Método Tradicional (Indicação)</span>
+                    <strong class="text-danger">Instável &amp; Limitado</strong>
+                  </div>
+                  <div class="comp-bar-wrapper">
+                    <div class="comp-bar bar-danger" style="width: 25%;"></div>
+                  </div>
+                  <p class="comp-note">Dependente de terceiros, sem previsibilidade mensal.</p>
+                </div>
+
+                <div class="comp-divider">VS</div>
+
+                <div class="comp-item success">
+                  <div class="comp-label">
+                    <span>Máquina Digital (Connect Digital)</span>
+                    <strong class="text-cyan">Previsível &amp; Escalável</strong>
+                  </div>
+                  <div class="comp-bar-wrapper">
+                    <div class="comp-bar bar-cyan" style="width: 95%;"></div>
+                  </div>
+                  <p class="comp-note">Atração ativa diária no raio onde sua empresa atende.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           CENA 2: MÁQUINA DE ATRAÇÃO 1 — GOOGLE ADS & BUSCA DE ALTA INTENÇÃO (17s - 29s)
+           ====================================================================== -->
+      <section class="scene-panel" id="scene2">
+        <div class="scene-split">
+          
+          <div class="scene-col-left">
+            <div class="callout-tag cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="tag-svg">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              <span>Atração por Intenção Imediata</span>
+            </div>
+
+            <h2 class="motion-title">
+              No topo do <span class="highlight-cyan">Google</span> no momento exato da urgência do cliente.
+            </h2>
+
+            <p class="motion-desc">
+              Quem pesquisa no Google não está navegando à toa. O cliente que digita *"dentista perto de mim"* ou *"eletricista de emergência"* quer contratar hoje. Nós colocamos seu anúncio no primeiro resultado.
+            </p>
+
+            <div class="feature-bullets">
+              <div class="bullet-row">
+                <div class="bullet-check">✓</div>
+                <span>Campanhas no Google Search com palavras-chave de alta conversão</span>
+              </div>
+              <div class="bullet-row">
+                <div class="bullet-check">✓</div>
+                <span>Google Meu Negócio otimizado com avaliações 5 estrelas e mapa</span>
+              </div>
+              <div class="bullet-row">
+                <div class="bullet-check">✓</div>
+                <span>Zero desperdício de verba: você só aparece para quem tem dinheiro e urgência</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="scene-col-right">
+            <!-- Mockup do Celular com Busca Real do Google -->
+            <div class="device-mockup">
+              <div class="phone-frame">
+                <div class="phone-notch"></div>
+                <div class="phone-screen">
+                  
+                  <!-- Barra Google -->
+                  <div class="google-search-bar">
+                    <div class="g-logo">G</div>
+                    <span class="search-text-typing" id="typingQuery">dentista em porto alegre</span>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" class="mic-icon">
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                    </svg>
+                  </div>
+
+                  <!-- Anúncio Patrocinado em Destaque -->
+                  <div class="google-ad-card">
+                    <div class="ad-tag-row">
+                      <span class="ad-badge">Patrocinado</span>
+                      <span class="ad-domain">www.whiteodontologia.com.br</span>
+                    </div>
+                    <h3 class="ad-title">White Odontologia | Implantes e Estética Dental</h3>
+                    <div class="ad-rating">
+                      <span class="stars">★★★★★</span>
+                      <span class="rating-val">4.9 (184 avaliações)</span>
+                      <span class="badge-open">Aberto agora</span>
+                    </div>
+                    <p class="ad-snippet">
+                      Atendimento especializado no Floresta/Moinhos. Agendamento prioritário direto no WhatsApp. Conheça nossos tratamentos.
+                    </p>
+                    <div class="ad-buttons-row">
+                      <div class="ad-btn call">
+                        <span>📞 Ligar</span>
+                      </div>
+                      <div class="ad-btn whatsapp">
+                        <span>💬 Orçar no WhatsApp</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- 2º Resultado Orgânico / Local Pack -->
+                  <div class="google-local-pack">
+                    <div class="pack-header">📍 Empresas na sua região</div>
+                    <div class="pack-item">
+                      <strong>Alves Instaladora Elétrica 24h</strong>
+                      <span>⭐ 5.0 • Plantão Emergencial</span>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           CENA 3: MÁQUINA DE ATRAÇÃO 2 — REDES SOCIAIS & MOSAICO DINÂMICO (29s - 40s)
+           ====================================================================== -->
+      <section class="scene-panel" id="scene3">
+        <div class="scene-split">
+          
+          <div class="scene-col-left">
+            <div class="callout-tag cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="tag-svg">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+              </svg>
+              <span>Atração por Desejo &amp; Autoridade</span>
+            </div>
+
+            <h2 class="motion-title">
+              No <span class="highlight-cyan">Instagram &amp; Facebook</span> gerando desejo para seu público local.
+            </h2>
+
+            <p class="motion-desc">
+              Vídeos magnéticos e fotos de serviços reais atingindo clientes no raio exato do seu bairro. O cliente é impactado repetidamente até você se tornar a única opção na mente dele.
+            </p>
+
+            <div class="radar-badge">
+              <div class="radar-circle">
+                <div class="radar-sweep"></div>
+              </div>
+              <div class="radar-info">
+                <strong>Segmentação Geográfica Cirúrgica</strong>
+                <span>Raio de 3km a 15km em volta da sua empresa</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="scene-col-right">
+            <!-- Mosaico Dinâmico Multi-Nicho dos 4 Segmentos -->
+            <div class="mosaic-container">
+              
+              <!-- Card Odonto -->
+              <div class="mosaic-card card-odonto" id="mosaicCard1">
+                <img src="assets/img/nicho_odonto.webp" alt="Odontologia">
+                <div class="mosaic-overlay">
+                  <span class="mosaic-niche">Odontologia</span>
+                  <h4>Harmonização &amp; Clareamento</h4>
+                  <span class="mosaic-cta">Ver Tratamentos ➔</span>
+                </div>
+              </div>
+
+              <!-- Card Eletricista -->
+              <div class="mosaic-card card-eletricista" id="mosaicCard2">
+                <img src="assets/img/nicho_eletricista.webp" alt="Eletricista">
+                <div class="mosaic-overlay">
+                  <span class="mosaic-niche">Eletricista</span>
+                  <h4>Instalação Elétrica Segura</h4>
+                  <span class="mosaic-cta">Chamar Plantão ➔</span>
+                </div>
+              </div>
+
+              <!-- Card Jardinagem -->
+              <div class="mosaic-card card-jardinagem" id="mosaicCard3">
+                <img src="assets/img/nicho_jardinagem.webp" alt="Jardinagem">
+                <div class="mosaic-overlay">
+                  <span class="mosaic-niche">Jardinagem</span>
+                  <h4>Corte de Grama &amp; Paisagismo</h4>
+                  <span class="mosaic-cta">Orçar Serviço ➔</span>
+                </div>
+              </div>
+
+              <!-- Card Restaurante -->
+              <div class="mosaic-card card-restaurante" id="mosaicCard4">
+                <img src="assets/img/nicho_restaurante.webp" alt="Restaurante">
+                <div class="mosaic-overlay">
+                  <span class="mosaic-niche">Gastronomia</span>
+                  <h4>Ambiente &amp; Sabores Únicos</h4>
+                  <span class="mosaic-cta">Reservar Mesa ➔</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           CENA 4: O DESTINO — LANDING PAGE DE ALTA CONVERSÃO (40s - 54s)
+           ====================================================================== -->
+      <section class="scene-panel" id="scene4">
+        <div class="scene-split">
+          
+          <div class="scene-col-left">
+            <div class="callout-tag cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="tag-svg">
+                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+              </svg>
+              <span>Estrutura de Alta Conversão</span>
+            </div>
+
+            <h2 class="motion-title">
+              O clique não é perdido: ele vai para um <span class="highlight-cyan">Site Profissional</span> sem atrito.
+            </h2>
+
+            <p class="motion-desc">
+              Não basta atrair o lead; ele precisa chegar em um site ultra-rápido, responsivo, sem poluição e desenhado para uma única finalidade: fazer ele clicar no WhatsApp para pedir orçamento.
+            </p>
+
+            <div class="speed-score-card">
+              <div class="score-circle">
+                <span class="score-num">100</span>
+                <span class="score-label">Google Score</span>
+              </div>
+              <div class="score-text">
+                <strong>Carregamento em Menos de 1 Segundo</strong>
+                <span>Design Mobile First, sem barra de aviso, fotos autênticas e botões de toque total.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="scene-col-right">
+            <!-- Browser Mockup da Landing Page de Alta Conversão -->
+            <div class="browser-mockup">
+              <div class="browser-nav">
+                <div class="dots-group">
+                  <span class="dot red"></span>
+                  <span class="dot yellow"></span>
+                  <span class="dot green"></span>
+                </div>
+                <div class="browser-url-bar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" class="lock-icon">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                  </svg>
+                  <span>https://site-clinica-lumina.vercel.app</span>
+                </div>
+                <div class="badge-fast">⚡ 0.8s</div>
+              </div>
+
+              <div class="browser-viewport">
+                <!-- Preview simulado da Landing Page com Hero e Botão de Ação -->
+                <div class="site-sim-header">
+                  <span class="site-sim-brand">LUMINA • ESTÉTICA</span>
+                  <span class="site-sim-btn">Agendar Consulta</span>
+                </div>
+                <div class="site-sim-hero">
+                  <div class="site-sim-left">
+                    <h4>Realce sua beleza natural com ciência e sofisticação</h4>
+                    <p>Atendimento exclusivo no Moinhos de Vento.</p>
+                    <div class="sim-btn-cta">
+                      <span>Quero Minha Avaliação VIP ➔</span>
+                    </div>
+                  </div>
+                  <div class="site-sim-right">
+                    <div class="sim-img-box"></div>
+                  </div>
+                </div>
+                <div class="site-sim-floating-wa">
+                  <span>💬 WhatsApp</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           CENA 5: I.A. + CHATBOT 24/7 + ENTREGA DE CRM & AUTOMAÇÕES (54s - 76s)
+           ====================================================================== -->
+      <section class="scene-panel" id="scene5">
+        <div class="scene-split split-extended">
+          
+          <div class="scene-col-left">
+            <div class="callout-tag cyan">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="tag-svg">
+                <path d="M12 2a4 4 0 0 1 4 4v2a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"></path>
+                <path d="M18 14a6 6 0 0 1-12 0"></path>
+                <line x1="12" y1="20" x2="12" y2="24"></line>
+                <line x1="8" y1="24" x2="16" y2="24"></line>
+              </svg>
+              <span>I.A. + Chatbot 24/7 + CRM de Vendas</span>
+            </div>
+
+            <h2 class="motion-title">
+              O fechamento no piloto automático: <span class="highlight-cyan">I.A. no WhatsApp</span> e <span class="highlight-green">CRM Integrado</span>.
+            </h2>
+
+            <p class="motion-desc">
+              Você não precisa parar seu serviço para responder mensagens repetitivas. Nossa inteligência artificial assume o atendimento no WhatsApp 24h por dia, qualifica o lead e envia os dados direto para o seu CRM comercial.
+            </p>
+
+            <div class="feature-bullets">
+              <div class="bullet-row">
+                <div class="bullet-check">🤖</div>
+                <span><strong>Chatbot I.A. 24 Horas:</strong> Responde em 2 segundos, tira dúvidas de procedimentos e quebra objeções.</span>
+              </div>
+              <div class="bullet-row">
+                <div class="bullet-check">📊</div>
+                <span><strong>Entrega de CRM Comercial:</strong> Funil visual tipo Kanban para você saber exatamente em qual etapa está cada cliente.</span>
+              </div>
+              <div class="bullet-row">
+                <div class="bullet-check">⚡</div>
+                <span><strong>Automação de Processos:</strong> Zero trabalho manual. Cada orçamento vira um card com valor estimado em tempo real.</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="scene-col-right">
+            <!-- MOCKUP SPLIT SCREEN (WHATSAPP I.A. + CRM KANBAN) -->
+            <div class="split-screen-mockup">
+              
+              <!-- 1. LADO ESQUERDO: CHATBOT I.A. NO WHATSAPP -->
+              <div class="mini-phone-wa">
+                <div class="mini-wa-header">
+                  <div class="mini-wa-avatar">🤖</div>
+                  <div class="mini-wa-info">
+                    <strong>Assistente I.A. • White Odonto</strong>
+                    <span class="mini-status">● Online 24h (Atendimento I.A.)</span>
+                  </div>
+                </div>
+
+                <div class="mini-wa-chat">
+                  <!-- Msg Paciente -->
+                  <div class="wa-msg user-msg" id="iaMsg1">
+                    <p>Olá! Queria saber sobre o clareamento e se tem horário para quinta.</p>
+                    <span class="wa-msg-time">14:15</span>
+                  </div>
+
+                  <!-- Resposta I.A. -->
+                  <div class="wa-msg bot-msg" id="iaMsg2">
+                    <div class="bot-badge">✦ Resposta da I.A. (2s)</div>
+                    <p>Olá Mariana! 🦷 Nosso clareamento a laser é indolor e feito em 1 sessão. Temos quinta às 10h30 ou às 15h. Qual horário fica melhor?</p>
+                    <span class="wa-msg-time">14:15</span>
+                  </div>
+
+                  <!-- Paciente escolhe -->
+                  <div class="wa-msg user-msg" id="iaMsg3">
+                    <p>Às 15h fica perfeito!</p>
+                    <span class="wa-msg-time">14:16</span>
+                  </div>
+
+                  <!-- Confirmação I.A. -->
+                  <div class="wa-msg bot-msg" id="iaMsg4">
+                    <div class="bot-badge">✦ Agendamento Confirmado</div>
+                    <p>Perfeito! Horário reservado para quinta às 15h. Já gerei seu voucher VIP e sincronizei com nosso sistema. Até breve! ✨</p>
+                    <span class="wa-msg-time">14:16</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CONECTOR DE AUTOMAÇÃO (PULSE ARROW) -->
+              <div class="integration-connector">
+                <div class="connector-line">
+                  <span class="connector-dot"></span>
+                </div>
+                <div class="connector-badge">
+                  <span class="webhook-icon">⚡</span>
+                  <span>Sync I.A. ➔ CRM</span>
+                </div>
+              </div>
+
+              <!-- 2. LADO DIREITO: CRM KANBAN DA CONNECT DIGITAL -->
+              <div class="crm-board-mockup">
+                <div class="crm-top-bar">
+                  <div class="crm-title-box">
+                    <span class="crm-logo-icon">📊</span>
+                    <strong>CRM Connect • Pipeline de Vendas</strong>
+                  </div>
+                  <span class="crm-sync-status">🟢 Webhook Ativo</span>
+                </div>
+
+                <div class="crm-columns-grid">
+                  
+                  <!-- Coluna 1 -->
+                  <div class="crm-column">
+                    <div class="col-head">
+                      <span>Novos Leads</span>
+                      <span class="col-count">3</span>
+                    </div>
+                    <div class="col-cards">
+                      <div class="crm-card static">
+                        <strong>Carlos Mendes</strong>
+                        <span class="card-meta">⚡ Eletricista • R$ 650</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Coluna 2 -->
+                  <div class="crm-column">
+                    <div class="col-head">
+                      <span>Triagem I.A.</span>
+                      <span class="col-count">2</span>
+                    </div>
+                    <div class="col-cards">
+                      <div class="crm-card static">
+                        <strong>Condomínio Bela Vista</strong>
+                        <span class="card-meta">🌿 Jardim • R$ 2.400</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Coluna 3: CARD RECEBIDO DA I.A. EM TEMPO REAL -->
+                  <div class="crm-column active-col">
+                    <div class="col-head highlight-head">
+                      <span>Qualificado &amp; Agendado</span>
+                      <span class="col-count count-green">1</span>
+                    </div>
+                    <div class="col-cards">
+                      <div class="crm-card incoming-lead-card" id="crmLiveCard">
+                        <div class="lead-card-top">
+                          <strong>Mariana Silveira</strong>
+                          <span class="lead-badge-ia">Agendado por I.A.</span>
+                        </div>
+                        <p class="lead-treatment">🦷 Clareamento a Laser VIP</p>
+                        <div class="lead-card-bottom">
+                          <span class="lead-time">📅 Quinta • 15:00</span>
+                          <strong class="lead-price">R$ 1.800,00</strong>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           CENA 6: ENCERRAMENTO & CALL TO ACTION (67s - 77s)
+           ====================================================================== -->
+      <section class="scene-panel" id="scene6">
+        <div class="cta-center-container">
+          
+          <!-- Logo Futurista Animado -->
+          <div class="closing-brand-icon">
+            <svg viewBox="0 0 120 120" fill="none">
+              <circle cx="60" cy="60" r="58" stroke="#00B4FF" stroke-width="2" stroke-dasharray="6 4" class="spin-ring"/>
+              <circle cx="60" cy="60" r="44" stroke="#00B4FF" stroke-width="1.5" opacity="0.4"/>
+              <path d="M28 60 C28 42 42 28 60 28 C78 28 90 40 90 54 C90 67 82 76 70 76 C60 76 54 69 54 60 C54 52 59 46 67 46 C74 46 79 51 79 58 C79 66 73 72 65 72 C57 72 51 66 51 58" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+              <circle cx="28" cy="60" r="5" fill="#00B4FF"/>
+              <circle cx="60" cy="28" r="5" fill="#00B4FF"/>
+              <circle cx="92" cy="60" r="5" fill="#00B4FF"/>
+              <circle cx="60" cy="92" r="5" fill="#00B4FF"/>
+            </svg>
+          </div>
+
+          <h2 class="closing-title">
+            CONNECT <span class="highlight-cyan">DIGITAL</span>
+          </h2>
+          
+          <p class="closing-tagline">
+            O Digital que Conecta sua Empresa ao Futuro e aos Seus Melhores Clientes.
+          </p>
+
+          <div class="closing-stats-row">
+            <div class="closing-stat">
+              <strong>+150</strong>
+              <span>Projetos Entregues</span>
+            </div>
+            <div class="closing-stat">
+              <strong>+5 Anos</strong>
+              <span>Desde 2020</span>
+            </div>
+            <div class="closing-stat">
+              <strong>98%</strong>
+              <span>Clientes Satisfeitos</span>
+            </div>
+          </div>
+
+          <div class="closing-action-box">
+            <a href="https://wa.me/5551998777570?text=Ol%C3%A1!%20Vi%20a%20apresenta%C3%A7%C3%A3o%20da%20Connect%20Digital%20e%20gostaria%20de%20agendar%20um%20diagn%C3%B3stico%20estrat%C3%A9gico%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" class="btn-cta-motion">
+              <span>Solicitar Diagnóstico Estratégico Gratuito</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-arrow">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+          </div>
+
+          <div class="closing-footer-note">
+            📍 Porto Alegre / RS • Atendimento Nacional • Fale com nossos especialistas
+          </div>
+
+        </div>
+      </section>
+
+      <!-- BARRA DE CONTROLE MOTION (RODAPÉ 16:9) -->
+      <footer class="motion-controls-bar">
+        <div class="progress-bar-container" id="progressBarContainer">
+          <div class="progress-bar-fill" id="progressBarFill"></div>
+        </div>
+
+        <div class="controls-inner">
+          <div class="playback-controls">
+            <button class="ctrl-btn" id="playPauseBtn" aria-label="Reproduzir ou pausar">
+              <svg class="ctrl-icon icon-play" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              <svg class="ctrl-icon icon-pause" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+              </svg>
+            </button>
+
+            <button class="ctrl-btn" id="restartBtn" aria-label="Reiniciar do começo">
+              <svg class="ctrl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+              </svg>
+            </button>
+
+            <span class="time-display" id="timeDisplay">00:00 / 01:30</span>
+          </div>
+
+          <!-- Seletor Rápido de Cenas -->
+          <div class="scene-nav-pills">
+            <button class="pill-btn active" data-scene="1">1. Diagnóstico</button>
+            <button class="pill-btn" data-scene="2">2. Google Ads</button>
+            <button class="pill-btn" data-scene="3">3. Redes Sociais</button>
+            <button class="pill-btn" data-scene="4">4. Landing Page</button>
+            <button class="pill-btn" data-scene="5">5. I.A. &amp; CRM</button>
+            <button class="pill-btn" data-scene="6">6. Connect Digital</button>
+          </div>
+
+          <div class="audio-controls">
+            <button class="ctrl-btn" id="muteBtn" aria-label="Silenciar ou ativar áudio">
+              <svg class="ctrl-icon icon-unmuted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+              </svg>
+              <svg class="ctrl-icon icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                <line x1="23" y1="9" x2="17" y2="15"></line>
+                <line x1="17" y1="9" x2="23" y2="15"></line>
+              </svg>
+            </button>
+
+            <button class="ctrl-btn" id="fullscreenBtn" aria-label="Alternar tela cheia">
+              <svg class="ctrl-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <polyline points="9 21 3 21 3 15"></polyline>
+                <line x1="21" y1="3" x2="14" y2="10"></line>
+                <line x1="3" y1="21" x2="10" y2="14"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- ELEMENTOS DE ÁUDIO NATIVOS DE LOCUÇÃO (ORGANIZADOS PARA FÁCIL SUBSTITUIÇÃO) -->
+  <audio id="audioScene1" src="audio/cena_01_diagnostico.mp3" preload="auto"></audio>
+  <audio id="audioScene2" src="audio/cena_02_google_ads.mp3" preload="auto"></audio>
+  <audio id="audioScene3" src="audio/cena_03_redes_sociais.mp3" preload="auto"></audio>
+  <audio id="audioScene4" src="audio/cena_04_landing_page.mp3" preload="auto"></audio>
+  <audio id="audioScene5" src="audio/cena_05_whatsapp_fechamento.mp3" preload="auto"></audio>
+  <audio id="audioScene6" src="audio/cena_06_cta_connect.mp3" preload="auto"></audio>
+
+  <!-- JAVASCRIPT MOTION -->
+  <script src="motion.js"></script>
+</body>
+</html>
+
