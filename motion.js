@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const SCENES = [
     {
       id: 1,
-      title: "O Diagnóstico dos Prestadores",
-      duration: 16.9,
+      title: "Posicionamento & Fuga de Lucro",
+      duration: 23.9,
       audioId: "audioScene1"
     },
     {
@@ -105,6 +105,81 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
+     VIRTUAL MOTION POINTER (CURSOR INTERATIVO 60FPS)
+     ========================================================================== */
+  const virtualCursor = document.getElementById('virtualCursor');
+  const cursorRipple = document.getElementById('cursorRipple');
+  const cursorLabel = document.getElementById('cursorLabel');
+  const stageCanvas = document.querySelector('.stage-canvas');
+
+  function moveCursor(targetX, targetY, options = {}) {
+    if (!virtualCursor) return;
+    const { label = null, duration = 0.8, delay = 0, clickAfter = null, onComplete = null } = options;
+
+    if (label && cursorLabel) {
+      cursorLabel.textContent = label;
+      cursorLabel.classList.add('show-label');
+    } else if (cursorLabel) {
+      cursorLabel.classList.remove('show-label');
+    }
+
+    gsap.to(virtualCursor, {
+      x: targetX,
+      y: targetY,
+      opacity: 1,
+      duration: duration,
+      delay: delay,
+      ease: 'power2.out',
+      onComplete: () => {
+        if (clickAfter !== null) {
+          registerTimeout(() => {
+            triggerCursorClick(onComplete);
+          }, clickAfter * 1000);
+        } else if (onComplete) {
+          onComplete();
+        }
+      }
+    });
+  }
+
+  function moveCursorToElement(selector, options = {}) {
+    if (!virtualCursor || !stageCanvas) return;
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) return;
+
+    const canvasRect = stageCanvas.getBoundingClientRect();
+    const elRect = el.getBoundingClientRect();
+
+    const offsetX = options.offsetX !== undefined ? options.offsetX : (elRect.width / 2);
+    const offsetY = options.offsetY !== undefined ? options.offsetY : (elRect.height / 2);
+
+    const targetX = (elRect.left - canvasRect.left) + offsetX;
+    const targetY = (elRect.top - canvasRect.top) + offsetY;
+
+    moveCursor(targetX, targetY, options);
+  }
+
+  function triggerCursorClick(callback) {
+    if (!virtualCursor) return;
+    virtualCursor.classList.add('active-click');
+    if (cursorRipple) {
+      cursorRipple.classList.remove('ripple-active');
+      void cursorRipple.offsetWidth;
+      cursorRipple.classList.add('ripple-active');
+    }
+    playPopChime();
+    setTimeout(() => {
+      virtualCursor.classList.remove('active-click');
+      if (callback) callback();
+    }, 180);
+  }
+
+  function hideCursor() {
+    if (!virtualCursor) return;
+    gsap.to(virtualCursor, { opacity: 0, duration: 0.3 });
+  }
+
+  /* ==========================================================================
      1. GERENCIAMENTO DE TRANSIÇÃO DE CENAS
      ========================================================================== */
   function showScene(index) {
@@ -162,14 +237,98 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof gsap === 'undefined') return;
 
     if (sceneNumber === 1) {
-      // Animação das barras de comparação
-      gsap.fromTo('.bar-danger', { width: '0%' }, { width: '25%', duration: 1.2, ease: 'power2.out' });
-      gsap.fromTo('.bar-cyan', { width: '0%' }, { width: '95%', duration: 1.5, delay: 0.3, ease: 'power2.out' });
-      gsap.fromTo('.niche-chip', { y: 15, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.15, delay: 0.5, ease: 'back.out(1.5)' });
+      // 1. Diagnóstico: Fuga de Verba vs. Retorno Estratégico (23.9s)
+      const dangerBlock = document.getElementById('dangerSideBlock');
+      const successBlock = document.getElementById('successSideBlock');
+      const dangerBar = document.getElementById('leakDangerBar');
+      const successBar = document.getElementById('leakSuccessBar');
+      const dangerVal = document.getElementById('dangerValDisplay');
+      const successVal = document.getElementById('successValDisplay');
+
+      // Reset
+      if (dangerBlock) dangerBlock.classList.remove('pulse-highlight');
+      if (successBlock) successBlock.classList.remove('pulse-highlight');
+      if (dangerBar) dangerBar.style.width = '0%';
+      if (successBar) successBar.style.width = '0%';
+
+      // Entrada do Card de Auditoria
+      gsap.fromTo('#leakVsRoiCard', 
+        { scale: 0.94, opacity: 0, y: 15 }, 
+        { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+      );
+      gsap.fromTo('.niche-chip', 
+        { y: 15, opacity: 0 }, 
+        { y: 0, opacity: 1, stagger: 0.12, delay: 0.4, ease: 'back.out(1.5)' }
+      );
+
+      // Posição inicial do cursor
+      if (virtualCursor) gsap.set(virtualCursor, { x: 140, y: 180, opacity: 0 });
+
+      // 1.5s: "...o dinheiro que você não vê entrando..." -> Cursor desliza para a Fuga de Verba
+      registerTimeout(() => {
+        moveCursorToElement('#dangerSideBlock', {
+          offsetX: 110,
+          offsetY: 60,
+          label: 'Fuga de Caixa',
+          duration: 1.1,
+          clickAfter: 0.3,
+          onComplete: () => {
+            if (dangerBlock) dangerBlock.classList.add('pulse-highlight');
+            if (dangerBar) dangerBar.style.width = '35%';
+            if (dangerVal) {
+              let count = 0;
+              const iv = setInterval(() => {
+                count += 340;
+                if (count >= 4850) {
+                  count = 4850;
+                  clearInterval(iv);
+                }
+                dangerVal.textContent = count.toLocaleString('pt-BR');
+              }, 40);
+            }
+          }
+        });
+      }, 1500);
+
+      // 9.5s: "...A Connect Digital implementa a estratégia exata..." -> Cursor cruza o VS para a Máquina de Retorno
+      registerTimeout(() => {
+        moveCursorToElement('#successSideBlock', {
+          offsetX: 130,
+          offsetY: 60,
+          label: 'Estratégia Connect',
+          duration: 1.3,
+          clickAfter: 0.35,
+          onComplete: () => {
+            if (successBlock) successBlock.classList.add('pulse-highlight');
+            if (successBar) successBar.style.width = '92%';
+            if (successVal) {
+              let count = 0;
+              const iv = setInterval(() => {
+                count += 1980;
+                if (count >= 28400) {
+                  count = 28400;
+                  clearInterval(iv);
+                }
+                successVal.textContent = count.toLocaleString('pt-BR');
+              }, 35);
+            }
+          }
+        });
+      }, 9500);
+
+      // 16.5s: Cursor destaca os nichos no lado esquerdo
+      registerTimeout(() => {
+        moveCursorToElement('.niches-mosaic-mini', {
+          label: 'Mercado Regional',
+          duration: 1.2,
+          offsetX: 80,
+          offsetY: 20
+        });
+      }, 16500);
     }
 
     if (sceneNumber === 2) {
-      // Efeito de digitação no Google e pop do anúncio
+      // 2. Google Ads & Intenção Imediata (13.1s)
       const typingEl = document.getElementById('typingQuery');
       if (typingEl) {
         typingEl.textContent = "";
@@ -182,13 +341,36 @@ document.addEventListener('DOMContentLoaded', () => {
           } else {
             clearInterval(typeInterval);
           }
-        }, 80);
+        }, 75);
       }
       gsap.fromTo('.google-ad-card', { scale: 0.9, opacity: 0, y: 20 }, { scale: 1, opacity: 1, y: 0, delay: 0.8, duration: 0.6, ease: 'back.out(1.7)' });
+
+      // Cursor posiciona na busca do Google e depois clica em "Orçar no WhatsApp"
+      registerTimeout(() => {
+        moveCursorToElement('.google-search-bar', {
+          label: 'Busca Ativa',
+          duration: 0.9,
+          offsetY: 16
+        });
+      }, 600);
+
+      registerTimeout(() => {
+        moveCursorToElement('.ad-btn.whatsapp', {
+          label: 'Conversão Imediata',
+          duration: 1.1,
+          clickAfter: 0.3,
+          onComplete: () => {
+            const btn = document.querySelector('.ad-btn.whatsapp');
+            if (btn) {
+              gsap.to(btn, { scale: 0.92, duration: 0.12, yoyo: true, repeat: 1 });
+            }
+          }
+        });
+      }, 4800);
     }
 
     if (sceneNumber === 3) {
-      // Feed do Instagram em Smartphone com rolagem fluida e pausas naturais
+      // 3. Instagram & Facebook (12.3s)
       gsap.fromTo('#scene3 .phone-frame', 
         { scale: 0.94, opacity: 0, y: 15 }, 
         { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
@@ -200,13 +382,40 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.set(feedTrack, { y: 0 });
 
         const instaTl = gsap.timeline({ delay: 0.8 });
-        // Transição para o Post 2 (Restaurante Rancho da Âncora)
         instaTl.to(feedTrack, { y: -210, duration: 1.5, ease: 'power2.inOut' }, "+=1.2")
-        // Transição para o Post 3 (Terra Verde Jardinagem)
                .to(feedTrack, { y: -420, duration: 1.5, ease: 'power2.inOut' }, "+=1.4")
-        // Transição para o Post 4 (Alves Instaladora Elétrica 24h)
                .to(feedTrack, { y: -630, duration: 1.5, ease: 'power2.inOut' }, "+=1.4");
       }
+
+      // Cursor inteligente rola o feed e clica no CTA do anúncio
+      registerTimeout(() => {
+        moveCursorToElement('#instaFeedViewport', {
+          label: 'Feed Local',
+          duration: 0.8,
+          offsetY: 70
+        });
+      }, 700);
+
+      registerTimeout(() => {
+        moveCursorToElement('.insta-cta-bar', {
+          label: 'Toque para WhatsApp',
+          duration: 0.9,
+          clickAfter: 0.2,
+          onComplete: () => {
+            const cta = document.querySelector('.insta-cta-bar');
+            if (cta) gsap.to(cta, { scale: 0.95, duration: 0.12, yoyo: true, repeat: 1 });
+          }
+        });
+      }, 2600);
+
+      // Acompanha a rolagem multi-nicho
+      registerTimeout(() => {
+        moveCursorToElement('#instaFeedViewport', {
+          label: 'Multi-Nicho',
+          duration: 0.7,
+          offsetY: 140
+        });
+      }, 5200);
     }
 
     if (sceneNumber === 4) {
@@ -299,63 +508,85 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 50);
       }
 
-      // Sincronização Perfeita com a Narração de 14.7s:
-      // 6.6s: "...desenhada para uma única ação..." -> Começa o preenchimento do Nome
+      // Sincronização Perfeita com Cursor e Digitação
       registerTimeout(() => {
-        typeText(fieldNome, placeholderNome, typingNome, cursorNome, "Mariana Silveira", () => {
-          // 8.2s: Digitação do WhatsApp
-          registerTimeout(() => {
-            typeText(fieldPhone, placeholderPhone, typingPhone, cursorPhone, "(51) 99877-7570", () => {
-              // 9.9s: Seleção do Procedimento
+        moveCursorToElement('#fieldNome', {
+          label: 'Preenchendo Nome',
+          duration: 0.7,
+          clickAfter: 0.1,
+          onComplete: () => {
+            typeText(fieldNome, placeholderNome, typingNome, cursorNome, "Mariana Silveira", () => {
               registerTimeout(() => {
-                if (fieldSelect) {
-                  fieldSelect.classList.add('focused');
-                  registerTimeout(() => {
-                    if (selectProcText) selectProcText.textContent = "✦ Harmonização Facial Sutil";
-                    fieldSelect.classList.remove('focused');
-                    fieldSelect.classList.add('filled');
-                    playPopChime();
-
-                    // 11.4s: "...solicitar um orçamento." -> Clique no botão e envio ao WhatsApp
-                    registerTimeout(() => {
-                      if (fieldSubmitBtn) {
-                        fieldSubmitBtn.classList.add('active-tap');
-                        playPopChime();
-                        gsap.to(fieldSubmitBtn, { 
-                          scale: 0.94, 
-                          duration: 0.15, 
-                          yoyo: true, 
-                          repeat: 1, 
-                          ease: 'power2.inOut',
+                moveCursorToElement('#fieldPhone', {
+                  label: 'WhatsApp Direto',
+                  duration: 0.6,
+                  clickAfter: 0.1,
+                  onComplete: () => {
+                    typeText(fieldPhone, placeholderPhone, typingPhone, cursorPhone, "(51) 99877-7570", () => {
+                      registerTimeout(() => {
+                        moveCursorToElement('#fieldSelect', {
+                          label: 'Escolhendo Procedimento',
+                          duration: 0.6,
+                          clickAfter: 0.1,
                           onComplete: () => {
-                            fieldSubmitBtn.classList.remove('active-tap');
-                            fieldSubmitBtn.classList.add('active-sent');
-                            if (submitBtnIcon) submitBtnIcon.textContent = "✓";
-                            if (submitBtnLabel) submitBtnLabel.textContent = "Orçamento Solicitado!";
-                            if (submitBtnArrow) submitBtnArrow.style.display = "none";
-                            if (formToast) formToast.classList.add('show');
+                            if (fieldSelect) {
+                              fieldSelect.classList.add('focused');
+                              registerTimeout(() => {
+                                if (selectProcText) selectProcText.textContent = "✦ Harmonização Facial Sutil";
+                                fieldSelect.classList.remove('focused');
+                                fieldSelect.classList.add('filled');
+                                playPopChime();
 
-                            // Pulso sonoro e visual no botão flutuante do WhatsApp
-                            gsap.fromTo('.lp-phone-floating-wa', 
-                              { scale: 1 }, 
-                              { scale: 1.25, duration: 0.22, yoyo: true, repeat: 3, ease: 'power2.inOut' }
-                            );
+                                registerTimeout(() => {
+                                  moveCursorToElement('#fieldSubmitBtn', {
+                                    label: 'Disparo 1-Clique',
+                                    duration: 0.6,
+                                    clickAfter: 0.15,
+                                    onComplete: () => {
+                                      if (fieldSubmitBtn) {
+                                        fieldSubmitBtn.classList.add('active-tap');
+                                        gsap.to(fieldSubmitBtn, { 
+                                          scale: 0.94, 
+                                          duration: 0.15, 
+                                          yoyo: true, 
+                                          repeat: 1, 
+                                          ease: 'power2.inOut',
+                                          onComplete: () => {
+                                            fieldSubmitBtn.classList.remove('active-tap');
+                                            fieldSubmitBtn.classList.add('active-sent');
+                                            if (submitBtnIcon) submitBtnIcon.textContent = "✓";
+                                            if (submitBtnLabel) submitBtnLabel.textContent = "Orçamento Solicitado!";
+                                            if (submitBtnArrow) submitBtnArrow.style.display = "none";
+                                            if (formToast) formToast.classList.add('show');
+
+                                            gsap.fromTo('.lp-phone-floating-wa', 
+                                              { scale: 1 }, 
+                                              { scale: 1.25, duration: 0.22, yoyo: true, repeat: 3, ease: 'power2.inOut' }
+                                            );
+                                          }
+                                        });
+                                      }
+                                    }
+                                  });
+                                }, 300);
+
+                              }, 400);
+                            }
                           }
                         });
-                      }
-                    }, 1100);
-
-                  }, 500);
-                }
-              }, 400);
+                      }, 250);
+                    });
+                  }
+                });
+              }, 250);
             });
-          }, 300);
+          }
         });
       }, 6400);
     }
 
     if (sceneNumber === 5) {
-      // Split Screen: Mensagens da I.A. no WhatsApp + Card animado no CRM
+      // 5. I.A. 24/7 + CRM (22.1s)
       const msgs = ['iaMsg1', 'iaMsg2', 'iaMsg3', 'iaMsg4'];
       msgs.forEach(id => {
         const el = document.getElementById(id);
@@ -365,30 +596,62 @@ document.addEventListener('DOMContentLoaded', () => {
       const crmLiveCard = document.getElementById('crmLiveCard');
       if (crmLiveCard) crmLiveCard.classList.remove('show');
 
-      // Sequência Sincronizada com a fala de 22s:
+      // Cursor entra no chat do WhatsApp
+      registerTimeout(() => {
+        moveCursorToElement('.mini-wa-header', {
+          label: 'I.A. Ativa no WhatsApp',
+          duration: 0.8,
+          offsetY: 20
+        });
+      }, 800);
+
       // 1.5s: Paciente pergunta
       registerTimeout(() => {
         const m1 = document.getElementById('iaMsg1');
-        if (m1) { m1.classList.add('show'); playPopChime(); }
+        if (m1) { 
+          m1.classList.add('show'); 
+          playPopChime(); 
+          moveCursorToElement(m1, { duration: 0.5 });
+        }
       }, 1500);
 
-      // 4.5s: Chatbot I.A. responde tirando dúvidas e propondo horário
+      // 4.8s: Chatbot I.A. responde tirando dúvidas e propondo horário
       registerTimeout(() => {
         const m2 = document.getElementById('iaMsg2');
-        if (m2) { m2.classList.add('show'); playPopChime(); }
+        if (m2) { 
+          m2.classList.add('show'); 
+          playPopChime(); 
+          moveCursorToElement(m2, { label: 'Resposta em 2s', duration: 0.6 });
+        }
       }, 4800);
 
-      // 9.0s: Paciente escolhe 15h
+      // 9.2s: Paciente escolhe 15h
       registerTimeout(() => {
         const m3 = document.getElementById('iaMsg3');
-        if (m3) { m3.classList.add('show'); playPopChime(); }
+        if (m3) { 
+          m3.classList.add('show'); 
+          playPopChime(); 
+          moveCursorToElement(m3, { duration: 0.5 });
+        }
       }, 9200);
 
-      // 12.5s: Chatbot I.A. confirma e sincroniza com CRM
+      // 12.8s: Chatbot I.A. confirma e sincroniza com CRM
       registerTimeout(() => {
         const m4 = document.getElementById('iaMsg4');
-        if (m4) { m4.classList.add('show'); playPopChime(); }
+        if (m4) { 
+          m4.classList.add('show'); 
+          playPopChime(); 
+          moveCursorToElement(m4, { label: 'Agendamento Confirmado', duration: 0.6 });
+        }
       }, 12800);
+
+      // 14.5s: Cursor cruza o conector para o CRM
+      registerTimeout(() => {
+        moveCursorToElement('.integration-connector', {
+          label: 'Sincronização CRM',
+          duration: 0.7
+        });
+      }, 14500);
 
       // 15.5s: Card entra automaticamente na coluna do CRM com destaque
       registerTimeout(() => {
@@ -399,14 +662,32 @@ document.addEventListener('DOMContentLoaded', () => {
             { scale: 0.8, boxShadow: '0 0 0px var(--cyan-neon)' }, 
             { scale: 1, boxShadow: '0 0 25px rgba(0, 180, 255, 0.6)', duration: 0.6, ease: 'back.out(2)' }
           );
+          moveCursorToElement(crmLiveCard, {
+            label: 'Oportunidade Salva no CRM',
+            duration: 0.6,
+            clickAfter: 0.2
+          });
         }
       }, 15500);
     }
 
+
     if (sceneNumber === 6) {
-      // Logo Connect Digital e CTA final
+      // 6. Connect Digital CTA (11.4s)
       gsap.fromTo('.closing-brand-icon', { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.8)' });
       gsap.fromTo('.btn-cta-motion', { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, delay: 0.4, duration: 0.6, ease: 'back.out(2)' });
+
+      registerTimeout(() => {
+        moveCursorToElement('.btn-cta-motion', {
+          label: 'Clique para Agendar',
+          duration: 1.0,
+          clickAfter: 0.4,
+          onComplete: () => {
+            const btn = document.querySelector('.btn-cta-motion');
+            if (btn) gsap.to(btn, { scale: 1.05, duration: 0.15, yoyo: true, repeat: 1 });
+          }
+        });
+      }, 2000);
     }
   }
 
