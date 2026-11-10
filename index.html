@@ -977,13 +977,13 @@
         </div>
       </section>
 
-      <!-- CURSOR INTERATIVO VIRTUAL (MOTION POINTER DINÂMICO 60FPS) -->
+      <!-- INDICADOR TOUCH INTERATIVO (BOLINHA ANIMADA 60FPS) -->
       <div class="virtual-cursor" id="virtualCursor">
-        <svg class="cursor-pointer-svg" viewBox="0 0 24 24" fill="none">
-          <path d="M4.5 3L11.5 21L14.5 14.5L21 11.5L4.5 3Z" fill="#00B4FF" stroke="#FFFFFF" stroke-width="1.8" stroke-linejoin="round"/>
-        </svg>
+        <div class="touch-dot">
+          <div class="touch-dot-core"></div>
+          <div class="touch-dot-ring"></div>
+        </div>
         <div class="cursor-click-ripple" id="cursorRipple"></div>
-        <span class="cursor-label" id="cursorLabel">Connect Digital</span>
       </div>
 
       <!-- BARRA DE CONTROLE MOTION (RODAPÉ 16:9) -->

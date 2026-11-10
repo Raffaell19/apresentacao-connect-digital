@@ -661,83 +661,106 @@ html, body {
   color: #F1F5F9;
 }
 
-/* --- CURSOR INTERATIVO VIRTUAL (MOTION POINTER 60FPS) --- */
+/* --- INDICADOR TOUCH INTERATIVO (BOLINHA ANIMADA 60FPS) --- */
 .virtual-cursor {
   position: absolute;
   top: 0;
   left: 0;
-  width: 22px;
-  height: 22px;
+  width: 32px;
+  height: 32px;
   pointer-events: none;
   z-index: 1000;
   display: flex;
   align-items: center;
-  gap: 6px;
+  justify-content: center;
   transform: translate(200px, 300px);
   will-change: transform;
 }
 
-.cursor-pointer-svg {
-  width: 22px;
-  height: 22px;
-  filter: drop-shadow(0 2px 10px rgba(0, 180, 255, 0.8));
-  transform-origin: 4.5px 3px;
-  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1);
+.touch-dot {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.14s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.virtual-cursor.active-click .cursor-pointer-svg {
-  transform: scale(0.8);
+.touch-dot-ring {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0, 180, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+  box-shadow: 
+    0 0 14px rgba(0, 180, 255, 0.7),
+    inset 0 0 6px rgba(255, 255, 255, 0.4);
+  animation: touchDotBreathing 2s infinite ease-in-out;
+}
+
+.touch-dot-core {
+  position: relative;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  box-shadow: 0 0 8px #00B4FF;
+  z-index: 2;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+@keyframes touchDotBreathing {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(0, 180, 255, 0.95), inset 0 0 8px rgba(255, 255, 255, 0.7);
+  }
+}
+
+/* Efeito de Clique / Toque na Tela */
+.virtual-cursor.active-click .touch-dot {
+  transform: scale(0.72);
+}
+
+.virtual-cursor.active-click .touch-dot-core {
+  transform: scale(0.7);
+  background: #00B4FF;
 }
 
 .cursor-click-ripple {
   position: absolute;
-  left: 4.5px;
-  top: 3px;
-  width: 26px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  border: 2px solid var(--cyan-neon);
-  box-shadow: 0 0 12px var(--cyan-neon);
+  border: 2px solid #00B4FF;
+  box-shadow: 0 0 16px #00B4FF;
   pointer-events: none;
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.2);
+  transform: scale(0.3);
 }
 
 .cursor-click-ripple.ripple-active {
-  animation: cursorRippleAnim 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: cursorRippleAnim 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes cursorRippleAnim {
   0% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(0.3);
+    transform: scale(0.3);
+    border-color: #FFFFFF;
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(2.6);
+    transform: scale(3.4);
+    border-color: #00B4FF;
   }
-}
-
-.cursor-label {
-  background: rgba(6, 10, 20, 0.92);
-  border: 1px solid rgba(0, 180, 255, 0.5);
-  border-radius: 4px;
-  padding: 2px 6px;
-  font-size: 0.56rem;
-  font-weight: 700;
-  color: #FFFFFF;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-  white-space: nowrap;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-}
-
-.cursor-label.show-label {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 /* --- 6. COMPONENTES VISUAIS (CENA 2: GOOGLE ADS EM IPHONE 17 PRO MAX) --- */

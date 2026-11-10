@@ -105,23 +105,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* ==========================================================================
-     VIRTUAL MOTION POINTER (CURSOR INTERATIVO 60FPS)
+     INDICADOR TOUCH ANIMADO (BOLINHA INTERATIVA 60FPS)
      ========================================================================== */
   const virtualCursor = document.getElementById('virtualCursor');
   const cursorRipple = document.getElementById('cursorRipple');
-  const cursorLabel = document.getElementById('cursorLabel');
   const stageCanvas = document.querySelector('.stage-canvas');
 
   function moveCursor(targetX, targetY, options = {}) {
     if (!virtualCursor) return;
-    const { label = null, duration = 0.8, delay = 0, clickAfter = null, onComplete = null } = options;
-
-    if (label && cursorLabel) {
-      cursorLabel.textContent = label;
-      cursorLabel.classList.add('show-label');
-    } else if (cursorLabel) {
-      cursorLabel.classList.remove('show-label');
-    }
+    const { duration = 0.8, delay = 0, clickAfter = null, onComplete = null } = options;
 
     gsap.to(virtualCursor, {
       x: targetX,
