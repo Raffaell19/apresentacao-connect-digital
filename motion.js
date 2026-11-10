@@ -92,11 +92,26 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (e) {}
   }
 
+  // Gerenciamento de Timers das Animações
+  let activeTimeouts = [];
+  function clearAllActiveTimeouts() {
+    activeTimeouts.forEach(t => clearTimeout(t));
+    activeTimeouts = [];
+  }
+  function registerTimeout(fn, delay) {
+    const t = setTimeout(fn, delay);
+    activeTimeouts.push(t);
+    return t;
+  }
+
   /* ==========================================================================
      1. GERENCIAMENTO DE TRANSIÇÃO DE CENAS
      ========================================================================== */
   function showScene(index) {
     if (index < 0 || index >= SCENES.length) return;
+
+    // Cancela timers da cena anterior
+    clearAllActiveTimeouts();
 
     // Para áudio anterior
     if (currentAudio) {
@@ -205,17 +220,138 @@ document.addEventListener('DOMContentLoaded', () => {
         { scale: 1, delay: 0.6, duration: 0.4, ease: 'back.out(2)' }
       );
 
+      // Elementos do Formulário VIP de Alta Conversão
+      const fieldNome = document.getElementById('fieldNome');
+      const placeholderNome = document.getElementById('placeholderNome');
+      const typingNome = document.getElementById('typingNome');
+      const cursorNome = document.getElementById('cursorNome');
+
+      const fieldPhone = document.getElementById('fieldPhone');
+      const placeholderPhone = document.getElementById('placeholderPhone');
+      const typingPhone = document.getElementById('typingPhone');
+      const cursorPhone = document.getElementById('cursorPhone');
+
+      const fieldSelect = document.getElementById('fieldSelect');
+      const selectProcText = document.getElementById('selectProcText');
+
+      const fieldSubmitBtn = document.getElementById('fieldSubmitBtn');
+      const submitBtnIcon = document.getElementById('submitBtnIcon');
+      const submitBtnLabel = document.getElementById('submitBtnLabel');
+      const submitBtnArrow = document.getElementById('submitBtnArrow');
+      const formToast = document.getElementById('formToast');
+
+      // Reset inicial do Formulário
+      if (fieldNome) {
+        fieldNome.classList.remove('focused', 'filled');
+        if (placeholderNome) placeholderNome.style.display = 'block';
+        if (typingNome) typingNome.textContent = '';
+        if (cursorNome) cursorNome.style.display = 'none';
+      }
+      if (fieldPhone) {
+        fieldPhone.classList.remove('focused', 'filled');
+        if (placeholderPhone) placeholderPhone.style.display = 'block';
+        if (typingPhone) typingPhone.textContent = '';
+        if (cursorPhone) cursorPhone.style.display = 'none';
+      }
+      if (fieldSelect) {
+        fieldSelect.classList.remove('focused', 'filled');
+        if (selectProcText) selectProcText.textContent = 'Selecione o procedimento...';
+      }
+      if (fieldSubmitBtn) {
+        fieldSubmitBtn.classList.remove('active-tap', 'active-sent');
+        if (submitBtnIcon) submitBtnIcon.textContent = '💬';
+        if (submitBtnLabel) submitBtnLabel.textContent = 'Solicitar Orçamento no WhatsApp';
+        if (submitBtnArrow) submitBtnArrow.style.display = 'inline';
+      }
+      if (formToast) formToast.classList.remove('show');
+
       const lpTrack = document.getElementById('lpScrollTrack');
       if (lpTrack) {
         gsap.killTweensOf(lpTrack);
         gsap.set(lpTrack, { y: 0 });
 
-        const lpTl = gsap.timeline({ delay: 0.9 });
-        // Rola revelando Provas Sociais e Abas de Tratamentos
-        lpTl.to(lpTrack, { y: -190, duration: 2.0, ease: 'power2.inOut' }, "+=1.6")
-        // Rola revelando Formulário VIP e CTA do WhatsApp
-            .to(lpTrack, { y: -380, duration: 2.2, ease: 'power2.inOut' }, "+=2.0");
+        const lpTl = gsap.timeline({ delay: 0.8 });
+        // Rola revelando Provas Sociais e Abas de Tratamentos (2.2s)
+        lpTl.to(lpTrack, { y: -210, duration: 1.8, ease: 'power2.inOut' }, "+=1.4")
+        // Rola centralizando o Formulário VIP de Alta Conversão na tela (5.0s)
+            .to(lpTrack, { y: -460, duration: 2.0, ease: 'power2.inOut' }, "+=1.4");
       }
+
+      // Função de Digitação com Cursor Interativo
+      function typeText(fieldEl, placeholderEl, typingEl, cursorEl, text, doneCb) {
+        if (!fieldEl || !typingEl) return;
+        fieldEl.classList.add('focused');
+        if (placeholderEl) placeholderEl.style.display = 'none';
+        if (cursorEl) cursorEl.style.display = 'inline-block';
+        typingEl.textContent = '';
+        let c = 0;
+        const iv = setInterval(() => {
+          if (c < text.length) {
+            typingEl.textContent += text.charAt(c);
+            c++;
+          } else {
+            clearInterval(iv);
+            if (cursorEl) cursorEl.style.display = 'none';
+            fieldEl.classList.remove('focused');
+            fieldEl.classList.add('filled');
+            if (doneCb) doneCb();
+          }
+        }, 50);
+      }
+
+      // Sincronização Perfeita com a Narração de 14.7s:
+      // 6.6s: "...desenhada para uma única ação..." -> Começa o preenchimento do Nome
+      registerTimeout(() => {
+        typeText(fieldNome, placeholderNome, typingNome, cursorNome, "Mariana Silveira", () => {
+          // 8.2s: Digitação do WhatsApp
+          registerTimeout(() => {
+            typeText(fieldPhone, placeholderPhone, typingPhone, cursorPhone, "(51) 99877-7570", () => {
+              // 9.9s: Seleção do Procedimento
+              registerTimeout(() => {
+                if (fieldSelect) {
+                  fieldSelect.classList.add('focused');
+                  registerTimeout(() => {
+                    if (selectProcText) selectProcText.textContent = "✦ Harmonização Facial Sutil";
+                    fieldSelect.classList.remove('focused');
+                    fieldSelect.classList.add('filled');
+                    playPopChime();
+
+                    // 11.4s: "...solicitar um orçamento." -> Clique no botão e envio ao WhatsApp
+                    registerTimeout(() => {
+                      if (fieldSubmitBtn) {
+                        fieldSubmitBtn.classList.add('active-tap');
+                        playPopChime();
+                        gsap.to(fieldSubmitBtn, { 
+                          scale: 0.94, 
+                          duration: 0.15, 
+                          yoyo: true, 
+                          repeat: 1, 
+                          ease: 'power2.inOut',
+                          onComplete: () => {
+                            fieldSubmitBtn.classList.remove('active-tap');
+                            fieldSubmitBtn.classList.add('active-sent');
+                            if (submitBtnIcon) submitBtnIcon.textContent = "✓";
+                            if (submitBtnLabel) submitBtnLabel.textContent = "Orçamento Solicitado!";
+                            if (submitBtnArrow) submitBtnArrow.style.display = "none";
+                            if (formToast) formToast.classList.add('show');
+
+                            // Pulso sonoro e visual no botão flutuante do WhatsApp
+                            gsap.fromTo('.lp-phone-floating-wa', 
+                              { scale: 1 }, 
+                              { scale: 1.25, duration: 0.22, yoyo: true, repeat: 3, ease: 'power2.inOut' }
+                            );
+                          }
+                        });
+                      }
+                    }, 1100);
+
+                  }, 500);
+                }
+              }, 400);
+            });
+          }, 300);
+        });
+      }, 6400);
     }
 
     if (sceneNumber === 5) {
@@ -231,31 +367,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Sequência Sincronizada com a fala de 22s:
       // 1.5s: Paciente pergunta
-      setTimeout(() => {
+      registerTimeout(() => {
         const m1 = document.getElementById('iaMsg1');
         if (m1) { m1.classList.add('show'); playPopChime(); }
       }, 1500);
 
       // 4.5s: Chatbot I.A. responde tirando dúvidas e propondo horário
-      setTimeout(() => {
+      registerTimeout(() => {
         const m2 = document.getElementById('iaMsg2');
         if (m2) { m2.classList.add('show'); playPopChime(); }
       }, 4800);
 
       // 9.0s: Paciente escolhe 15h
-      setTimeout(() => {
+      registerTimeout(() => {
         const m3 = document.getElementById('iaMsg3');
         if (m3) { m3.classList.add('show'); playPopChime(); }
       }, 9200);
 
       // 12.5s: Chatbot I.A. confirma e sincroniza com CRM
-      setTimeout(() => {
+      registerTimeout(() => {
         const m4 = document.getElementById('iaMsg4');
         if (m4) { m4.classList.add('show'); playPopChime(); }
       }, 12800);
 
       // 15.5s: Card entra automaticamente na coluna do CRM com destaque
-      setTimeout(() => {
+      registerTimeout(() => {
         if (crmLiveCard) {
           crmLiveCard.classList.add('show');
           playPopChime();

@@ -679,14 +679,25 @@ html, body {
   z-index: 10;
 }
 
-.insta-logo-text {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 1.05rem;
-  letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.insta-header-left {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.insta-wordmark-svg {
+  height: 28px;
+  width: auto;
+  max-width: 108px;
+  display: block;
+}
+
+.insta-chevron-svg {
+  width: 13px;
+  height: 13px;
+  stroke: #CBD5E1;
+  stroke-width: 2.5;
+  margin-top: 2px;
 }
 
 .insta-header-icons {
@@ -1101,39 +1112,172 @@ html, body {
 
 .lp-mob-form-box {
   background: #FFFFFF;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #E8DFD5;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1.5px solid #E8DFD5;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  margin-bottom: 55px; /* espaço extra para visualização completa no viewport */
+  position: relative;
 }
 
-.lp-mob-form-box h4 {
-  font-size: 0.78rem;
+.lp-form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #F1EAE2;
+  padding-bottom: 6px;
+}
+
+.lp-form-header h4 {
+  font-size: 0.8rem;
   font-weight: 800;
   color: #25211F;
   margin: 0;
 }
 
+.lp-form-badge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #10B981;
+  background: rgba(16, 185, 129, 0.12);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.lp-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.lp-field-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #726963;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
 .lp-fake-input, .lp-fake-select {
   background: #FAF7F2;
-  border: 1px solid #E8DFD5;
-  border-radius: 5px;
-  padding: 5px 8px;
-  font-size: 0.7rem;
+  border: 1.5px solid #E8DFD5;
+  border-radius: 6px;
+  padding: 7px 10px;
+  font-size: 0.72rem;
   color: #25211F;
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.lp-fake-input.focused {
+  border-color: #00B4FF;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.18);
+}
+
+.lp-fake-input.filled {
+  border-color: #10B981;
+  background: #FFFFFF;
+}
+
+.lp-fake-select.focused {
+  border-color: #00B4FF;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(0, 180, 255, 0.18);
+}
+
+.lp-fake-select.filled {
+  border-color: #10B981;
+  background: #FFFFFF;
+  color: #047857;
+  font-weight: 700;
+}
+
+.input-placeholder {
+  color: #A8A29E;
+  font-size: 0.72rem;
+}
+
+.typing-text {
+  color: #1E293B;
+  font-weight: 700;
+  font-size: 0.74rem;
+}
+
+.input-cursor {
+  display: none;
+  width: 2px;
+  height: 14px;
+  background: #00B4FF;
+  margin-left: 2px;
+  animation: blinkFormCursor 0.6s infinite;
+}
+
+@keyframes blinkFormCursor {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.select-arrow {
+  margin-left: auto;
+  font-size: 0.65rem;
+  color: #726963;
 }
 
 .lp-fake-submit {
-  background: #10B981;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
   color: #FFFFFF;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 7px 10px;
-  border-radius: 5px;
+  font-size: 0.74rem;
+  font-weight: 800;
+  padding: 9px 12px;
+  border-radius: 6px;
   text-align: center;
-  margin-top: 2px;
+  margin-top: 4px;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lp-fake-submit.active-tap {
+  transform: scale(0.95);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.8);
+}
+
+.lp-fake-submit.active-sent {
+  background: #047857;
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.6);
+}
+
+.lp-form-toast {
+  display: none;
+  background: #064E3B;
+  color: #A7F3D0;
+  border: 1px solid #10B981;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-align: center;
+  animation: fadeInToast 0.3s ease;
+}
+
+.lp-form-toast.show {
+  display: block;
+}
+
+@keyframes fadeInToast {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .lp-phone-floating-wa {
