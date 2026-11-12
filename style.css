@@ -450,6 +450,28 @@ html, body {
   animation: pulseOpacity 2s infinite ease-in-out;
 }
 
+.leak-badge-live.cyan-badge {
+  color: var(--cyan-neon);
+  background: rgba(0, 180, 255, 0.12);
+  border: 1px solid rgba(0, 180, 255, 0.4);
+  box-shadow: 0 0 10px rgba(0, 180, 255, 0.25);
+}
+
+.commercial-hero-title {
+  font-size: clamp(1.7rem, 2.3vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+
+.commercial-pillars {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
 @keyframes pulseOpacity {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }

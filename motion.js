@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const SCENES = [
     {
       id: 1,
-      title: "Posicionamento & Fuga de Lucro",
-      duration: 23.9,
+      title: "Proposta Comercial",
+      duration: 30.6,
       audioId: "audioScene1"
     },
     {
@@ -229,13 +229,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof gsap === 'undefined') return;
 
     if (sceneNumber === 1) {
-      // 1. Diagnóstico: Fuga de Verba vs. Retorno Estratégico (23.9s)
+      // 1. Proposta Comercial: Alavancagem Sem Inflar Folha (30.6s)
       const dangerBlock = document.getElementById('dangerSideBlock');
       const successBlock = document.getElementById('successSideBlock');
       const dangerBar = document.getElementById('leakDangerBar');
       const successBar = document.getElementById('leakSuccessBar');
-      const dangerVal = document.getElementById('dangerValDisplay');
-      const successVal = document.getElementById('successValDisplay');
 
       // Reset
       if (dangerBlock) dangerBlock.classList.remove('pulse-highlight');
@@ -243,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (dangerBar) dangerBar.style.width = '0%';
       if (successBar) successBar.style.width = '0%';
 
-      // Entrada do Card de Auditoria
+      // Entrada do Card de Alavancagem e dos Pilares
       gsap.fromTo('#leakVsRoiCard', 
         { scale: 0.94, opacity: 0, y: 15 }, 
         { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
@@ -253,70 +251,60 @@ document.addEventListener('DOMContentLoaded', () => {
         { y: 0, opacity: 1, stagger: 0.12, delay: 0.4, ease: 'back.out(1.5)' }
       );
 
-      // Posição inicial do cursor
+      // Posição inicial da bolinha touch
       if (virtualCursor) gsap.set(virtualCursor, { x: 140, y: 180, opacity: 0 });
 
-      // 1.5s: "...o dinheiro que você não vê entrando..." -> Cursor desliza para a Fuga de Verba
+      // 1.5s: "...Esta é a proposta comercial da Connect Digital..." -> Bolinha touch destaca a Marca / Proposta
       registerTimeout(() => {
-        moveCursorToElement('#dangerSideBlock', {
-          offsetX: 110,
-          offsetY: 60,
-          label: 'Fuga de Caixa',
-          duration: 1.1,
-          clickAfter: 0.3,
-          onComplete: () => {
-            if (dangerBlock) dangerBlock.classList.add('pulse-highlight');
-            if (dangerBar) dangerBar.style.width = '35%';
-            if (dangerVal) {
-              let count = 0;
-              const iv = setInterval(() => {
-                count += 340;
-                if (count >= 4850) {
-                  count = 4850;
-                  clearInterval(iv);
-                }
-                dangerVal.textContent = count.toLocaleString('pt-BR');
-              }, 40);
-            }
-          }
+        moveCursorToElement('.commercial-hero-title', {
+          duration: 1.0,
+          clickAfter: 0.2
         });
       }, 1500);
 
-      // 9.5s: "...A Connect Digital implementa a estratégia exata..." -> Cursor cruza o VS para a Máquina de Retorno
+      // 6.5s: "...fazer a sua empresa crescer para crescermos juntos..." -> Bolinha desliza para os pilares comerciais
+      registerTimeout(() => {
+        moveCursorToElement('.commercial-pillars', {
+          offsetX: 70,
+          offsetY: 25,
+          duration: 1.1,
+          clickAfter: 0.2
+        });
+      }, 6500);
+
+      // 13.0s: "...colocamos seu negócio diante do cliente ideal..." -> Destaca o chip de cliente ideal
+      registerTimeout(() => {
+        moveCursorToElement('.commercial-pillars', {
+          offsetX: 70,
+          offsetY: 65,
+          duration: 1.0,
+          clickAfter: 0.2
+        });
+      }, 13000);
+
+      // 19.0s: "...sem precisar contratar novos funcionários e sem inflar sua folha..." -> Bolinha cruza para a máquina enxuta
       registerTimeout(() => {
         moveCursorToElement('#successSideBlock', {
           offsetX: 130,
           offsetY: 60,
-          label: 'Estratégia Connect',
           duration: 1.3,
           clickAfter: 0.35,
           onComplete: () => {
             if (successBlock) successBlock.classList.add('pulse-highlight');
-            if (successBar) successBar.style.width = '92%';
-            if (successVal) {
-              let count = 0;
-              const iv = setInterval(() => {
-                count += 1980;
-                if (count >= 28400) {
-                  count = 28400;
-                  clearInterval(iv);
-                }
-                successVal.textContent = count.toLocaleString('pt-BR');
-              }, 35);
-            }
+            if (successBar) successBar.style.width = '95%';
+            if (dangerBar) dangerBar.style.width = '80%';
           }
         });
-      }, 9500);
+      }, 19000);
 
-      // 16.5s: Cursor destaca os nichos no lado esquerdo
+      // 26.5s: "...Máxima eficiência, lucro no bolso." -> Pousa no rodapé de conclusão
       registerTimeout(() => {
-        moveCursorToElement('.niches-mosaic-mini', {
-          label: 'Mercado Regional',
-          duration: 1.2,
-          offsetX: 80,
-          offsetY: 20
+        moveCursorToElement('.leak-card-footer', {
+          duration: 1.0,
+          offsetY: 15,
+          clickAfter: 0.25
         });
-      }, 16500);
+      }, 26500);
     }
 
     if (sceneNumber === 2) {
@@ -340,7 +328,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Cursor posiciona na busca do Google e depois clica em "Orçar no WhatsApp"
       registerTimeout(() => {
         moveCursorToElement('.google-search-bar', {
-          label: 'Busca Ativa',
           duration: 0.9,
           offsetY: 16
         });
@@ -348,7 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       registerTimeout(() => {
         moveCursorToElement('.ad-btn.whatsapp', {
-          label: 'Conversão Imediata',
           duration: 1.1,
           clickAfter: 0.3,
           onComplete: () => {
@@ -382,7 +368,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Cursor inteligente rola o feed e clica no CTA do anúncio
       registerTimeout(() => {
         moveCursorToElement('#instaFeedViewport', {
-          label: 'Feed Local',
           duration: 0.8,
           offsetY: 70
         });
@@ -390,7 +375,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       registerTimeout(() => {
         moveCursorToElement('.insta-cta-bar', {
-          label: 'Toque para WhatsApp',
           duration: 0.9,
           clickAfter: 0.2,
           onComplete: () => {
@@ -403,7 +387,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Acompanha a rolagem multi-nicho
       registerTimeout(() => {
         moveCursorToElement('#instaFeedViewport', {
-          label: 'Multi-Nicho',
           duration: 0.7,
           offsetY: 140
         });
@@ -503,21 +486,18 @@ document.addEventListener('DOMContentLoaded', () => {
       // Sincronização Perfeita com Cursor e Digitação
       registerTimeout(() => {
         moveCursorToElement('#fieldNome', {
-          label: 'Preenchendo Nome',
           duration: 0.7,
           clickAfter: 0.1,
           onComplete: () => {
             typeText(fieldNome, placeholderNome, typingNome, cursorNome, "Mariana Silveira", () => {
               registerTimeout(() => {
                 moveCursorToElement('#fieldPhone', {
-                  label: 'WhatsApp Direto',
                   duration: 0.6,
                   clickAfter: 0.1,
                   onComplete: () => {
                     typeText(fieldPhone, placeholderPhone, typingPhone, cursorPhone, "(51) 99877-7570", () => {
                       registerTimeout(() => {
                         moveCursorToElement('#fieldSelect', {
-                          label: 'Escolhendo Procedimento',
                           duration: 0.6,
                           clickAfter: 0.1,
                           onComplete: () => {
@@ -531,7 +511,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                                 registerTimeout(() => {
                                   moveCursorToElement('#fieldSubmitBtn', {
-                                    label: 'Disparo 1-Clique',
                                     duration: 0.6,
                                     clickAfter: 0.15,
                                     onComplete: () => {
@@ -591,7 +570,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // Cursor entra no chat do WhatsApp
       registerTimeout(() => {
         moveCursorToElement('.mini-wa-header', {
-          label: 'I.A. Ativa no WhatsApp',
           duration: 0.8,
           offsetY: 20
         });
@@ -613,7 +591,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (m2) { 
           m2.classList.add('show'); 
           playPopChime(); 
-          moveCursorToElement(m2, { label: 'Resposta em 2s', duration: 0.6 });
+          moveCursorToElement(m2, { duration: 0.6 });
         }
       }, 4800);
 
@@ -633,14 +611,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (m4) { 
           m4.classList.add('show'); 
           playPopChime(); 
-          moveCursorToElement(m4, { label: 'Agendamento Confirmado', duration: 0.6 });
+          moveCursorToElement(m4, { duration: 0.6 });
         }
       }, 12800);
 
       // 14.5s: Cursor cruza o conector para o CRM
       registerTimeout(() => {
         moveCursorToElement('.integration-connector', {
-          label: 'Sincronização CRM',
           duration: 0.7
         });
       }, 14500);
@@ -655,7 +632,6 @@ document.addEventListener('DOMContentLoaded', () => {
             { scale: 1, boxShadow: '0 0 25px rgba(0, 180, 255, 0.6)', duration: 0.6, ease: 'back.out(2)' }
           );
           moveCursorToElement(crmLiveCard, {
-            label: 'Oportunidade Salva no CRM',
             duration: 0.6,
             clickAfter: 0.2
           });
@@ -671,7 +647,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       registerTimeout(() => {
         moveCursorToElement('.btn-cta-motion', {
-          label: 'Clique para Agendar',
           duration: 1.0,
           clickAfter: 0.4,
           onComplete: () => {
