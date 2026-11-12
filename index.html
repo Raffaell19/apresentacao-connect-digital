@@ -65,7 +65,18 @@
       </header>
 
       <!-- ======================================================================
-           CENA 1: PROPOSTA COMERCIAL & ALAVANCAGEM SEM INFLAR FOLHA (0s - 31s)
+           CENA 0: ABERTURA OFICIAL — PROPOSTA COMERCIAL (0s - 4.2s)
+           ====================================================================== -->
+      <section class="scene-panel active" id="scene0">
+        <div class="intro-centered-proposta">
+          <h1 class="hero-proposta-comercial">
+            PROPOSTA <span class="highlight-cyan">COMERCIAL</span>
+          </h1>
+        </div>
+      </section>
+
+      <!-- ======================================================================
+           CENA 1: ALAVANCAGEM & ESTRUTURA ENXUTA (0s - 27s)
            ====================================================================== -->
       <section class="scene-panel" id="scene1">
         <div class="scene-split">
@@ -77,7 +88,7 @@
             </div>
 
             <h1 class="motion-title commercial-hero-title">
-              PROPOSTA <span class="highlight-cyan">COMERCIAL</span>
+              ESTRUTURA ENXUTA &amp; <span class="highlight-cyan">CRESCIMENTO</span>
             </h1>
 
             <p class="motion-desc">
@@ -1011,12 +1022,13 @@
               </svg>
             </button>
 
-            <span class="time-display" id="timeDisplay">00:00 / 01:44</span>
+            <span class="time-display" id="timeDisplay">00:00 / 01:45</span>
           </div>
 
           <!-- Seletor Rápido de Cenas -->
           <div class="scene-nav-pills">
-            <button class="pill-btn active" data-scene="1">1. Proposta Comercial</button>
+            <button class="pill-btn active" data-scene="0">✦ Abertura</button>
+            <button class="pill-btn" data-scene="1">1. Alavancagem</button>
             <button class="pill-btn" data-scene="2">2. Google Ads</button>
             <button class="pill-btn" data-scene="3">3. Redes Sociais</button>
             <button class="pill-btn" data-scene="4">4. Landing Page</button>
@@ -1055,6 +1067,7 @@
   </div>
 
   <!-- ELEMENTOS DE ÁUDIO NATIVOS DE LOCUÇÃO (ORGANIZADOS PARA FÁCIL SUBSTITUIÇÃO) -->
+  <audio id="audioScene0" src="audio/cena_00_abertura.mp3" preload="auto"></audio>
   <audio id="audioScene1" src="audio/cena_01_diagnostico.mp3" preload="auto"></audio>
   <audio id="audioScene2" src="audio/cena_02_google_ads.mp3" preload="auto"></audio>
   <audio id="audioScene3" src="audio/cena_03_redes_sociais.mp3" preload="auto"></audio>

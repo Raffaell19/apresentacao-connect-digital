@@ -8,9 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
   // Definição das Cenas e Timings (Sincronizado com os áudios humanizados da Francisca Neural)
   const SCENES = [
     {
-      id: 1,
+      id: 0,
       title: "Proposta Comercial",
-      duration: 30.6,
+      duration: 4.2,
+      audioId: "audioScene0"
+    },
+    {
+      id: 1,
+      title: "Alavancagem & Estrutura Enxuta",
+      duration: 27.0,
       audioId: "audioScene1"
     },
     {
@@ -193,21 +199,29 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.scene-panel').forEach((panel, i) => {
       if (i === index) {
         panel.classList.add('active');
-        triggerSceneAnimations(i + 1);
+        triggerSceneAnimations(sceneData.id);
       } else {
         panel.classList.remove('active');
       }
     });
 
     // Atualiza Pills da Barra de Controle
-    scenePills.forEach((pill, i) => {
-      if (i === index) pill.classList.add('active');
+    scenePills.forEach((pill) => {
+      const pIndex = parseInt(pill.getAttribute('data-scene'), 10);
+      if (pIndex === index) pill.classList.add('active');
       else pill.classList.remove('active');
     });
 
     // Atualiza cabeçalho indicador
-    if (sceneBadge) sceneBadge.textContent = `CENA 0${index + 1} / 0${SCENES.length}`;
-    if (sceneTitleTag) sceneTitleTag.textContent = sceneData.title;
+    if (sceneData.id === 0) {
+      if (sceneBadge) sceneBadge.textContent = "ABERTURA";
+      if (sceneTitleTag) sceneTitleTag.textContent = "Proposta Comercial";
+      gsap.to('.stage-header', { opacity: 0, duration: 0.25 });
+    } else {
+      if (sceneBadge) sceneBadge.textContent = `CENA 0${sceneData.id} / 06`;
+      if (sceneTitleTag) sceneTitleTag.textContent = sceneData.title;
+      gsap.to('.stage-header', { opacity: 1, duration: 0.35 });
+    }
 
     // Toca áudio correspondente se estiver em modo play
     currentAudio = document.getElementById(sceneData.audioId);
@@ -228,8 +242,20 @@ document.addEventListener('DOMContentLoaded', () => {
   function triggerSceneAnimations(sceneNumber) {
     if (typeof gsap === 'undefined') return;
 
+    if (sceneNumber === 0) {
+      // 0. Abertura Oficial: PROPOSTA COMERCIAL (4.2s)
+      hideCursor();
+      gsap.to('.stage-header', { opacity: 0, duration: 0.25 });
+
+      gsap.fromTo('.hero-proposta-comercial', 
+        { scale: 0.88, opacity: 0, filter: 'blur(12px)' }, 
+        { scale: 1, opacity: 1, filter: 'blur(0px)', duration: 1.2, ease: 'power2.out' }
+      );
+    }
+
     if (sceneNumber === 1) {
-      // 1. Proposta Comercial: Alavancagem Sem Inflar Folha (30.6s)
+      // 1. Alavancagem Sem Inflar Folha (27.0s)
+      gsap.to('.stage-header', { opacity: 1, duration: 0.35 });
       const dangerBlock = document.getElementById('dangerSideBlock');
       const successBlock = document.getElementById('successSideBlock');
       const dangerBar = document.getElementById('leakDangerBar');
@@ -246,48 +272,48 @@ document.addEventListener('DOMContentLoaded', () => {
         { scale: 0.94, opacity: 0, y: 15 }, 
         { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
       );
-      gsap.fromTo('.niche-chip', 
+      gsap.fromTo('.commercial-pillars .niche-chip', 
         { y: 15, opacity: 0 }, 
-        { y: 0, opacity: 1, stagger: 0.12, delay: 0.4, ease: 'back.out(1.5)' }
+        { y: 0, opacity: 1, stagger: 0.1, delay: 0.3, ease: 'back.out(1.5)' }
       );
 
       // Posição inicial da bolinha touch
       if (virtualCursor) gsap.set(virtualCursor, { x: 140, y: 180, opacity: 0 });
 
-      // 1.5s: "...Esta é a proposta comercial da Connect Digital..." -> Bolinha touch destaca a Marca / Proposta
+      // 1.0s: "...Nosso compromisso é direto..." -> Bolinha touch destaca a Marca / Proposta
       registerTimeout(() => {
         moveCursorToElement('.commercial-hero-title', {
           duration: 1.0,
           clickAfter: 0.2
         });
-      }, 1500);
+      }, 1000);
 
-      // 6.5s: "...fazer a sua empresa crescer para crescermos juntos..." -> Bolinha desliza para os pilares comerciais
+      // 4.5s: "...fazer a sua empresa crescer para crescermos juntos..." -> Bolinha desliza para os pilares comerciais
       registerTimeout(() => {
         moveCursorToElement('.commercial-pillars', {
           offsetX: 70,
           offsetY: 25,
-          duration: 1.1,
+          duration: 1.0,
           clickAfter: 0.2
         });
-      }, 6500);
+      }, 4500);
 
-      // 13.0s: "...colocamos seu negócio diante do cliente ideal..." -> Destaca o chip de cliente ideal
+      // 9.5s: "...colocamos seu negócio diante do cliente ideal..." -> Destaca o chip de cliente ideal
       registerTimeout(() => {
         moveCursorToElement('.commercial-pillars', {
           offsetX: 70,
           offsetY: 65,
-          duration: 1.0,
+          duration: 0.9,
           clickAfter: 0.2
         });
-      }, 13000);
+      }, 9500);
 
-      // 19.0s: "...sem precisar contratar novos funcionários e sem inflar sua folha..." -> Bolinha cruza para a máquina enxuta
+      // 15.0s: "...sem precisar contratar novos funcionários e sem inflar sua folha..." -> Bolinha cruza para a máquina enxuta
       registerTimeout(() => {
         moveCursorToElement('#successSideBlock', {
           offsetX: 130,
           offsetY: 60,
-          duration: 1.3,
+          duration: 1.2,
           clickAfter: 0.35,
           onComplete: () => {
             if (successBlock) successBlock.classList.add('pulse-highlight');
@@ -295,16 +321,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (dangerBar) dangerBar.style.width = '80%';
           }
         });
-      }, 19000);
+      }, 15000);
 
-      // 26.5s: "...Máxima eficiência, lucro no bolso." -> Pousa no rodapé de conclusão
+      // 22.0s: "...Máxima eficiência, lucro no bolso." -> Pousa no rodapé de conclusão
       registerTimeout(() => {
         moveCursorToElement('.leak-card-footer', {
-          duration: 1.0,
+          duration: 0.9,
           offsetY: 15,
           clickAfter: 0.25
         });
-      }, 26500);
+      }, 22000);
     }
 
     if (sceneNumber === 2) {
@@ -775,7 +801,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Seletor de Cenas via Pills
   scenePills.forEach(pill => {
     pill.addEventListener('click', () => {
-      const targetScene = parseInt(pill.getAttribute('data-scene'), 10) - 1;
+      const targetScene = parseInt(pill.getAttribute('data-scene'), 10);
       showScene(targetScene);
       if (isPlaying) scheduleNextScene();
     });

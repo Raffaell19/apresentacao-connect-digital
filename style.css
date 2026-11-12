@@ -450,6 +450,50 @@ html, body {
   animation: pulseOpacity 2s infinite ease-in-out;
 }
 
+/* ==========================================================================
+   CENA 0: ABERTURA PURA & CENTRALIZADA (PROPOSTA COMERCIAL)
+   ========================================================================== */
+#scene0 {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#scene0.active {
+  display: flex !important;
+}
+
+.intro-centered-proposta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 40px;
+}
+
+.hero-proposta-comercial {
+  font-size: clamp(3.2rem, 6.2vw, 5.6rem);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: center;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+  user-select: none;
+}
+
+.hero-proposta-comercial .highlight-cyan {
+  color: var(--cyan-neon);
+  text-shadow: 0 0 35px rgba(0, 180, 255, 0.55), 0 0 70px rgba(0, 180, 255, 0.25);
+}
+
 .leak-badge-live.cyan-badge {
   color: var(--cyan-neon);
   background: rgba(0, 180, 255, 0.12);
