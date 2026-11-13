@@ -681,16 +681,19 @@ html, body {
 
 .chart-point-tag {
   position: absolute;
-  right: 18px;
-  top: 12px;
+  right: 58px;
+  top: 8px;
   font-size: 0.72rem;
   font-weight: 700;
   color: #00ff88;
-  background: rgba(0, 255, 136, 0.12);
-  border: 1px solid rgba(0, 255, 136, 0.4);
+  background: rgba(4, 10, 22, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 255, 136, 0.55);
   border-radius: 20px;
-  padding: 3px 10px;
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.25);
+  padding: 3px 12px;
+  box-shadow: 0 0 14px rgba(0, 255, 136, 0.25);
+  z-index: 2;
+  white-space: nowrap;
 }
 
 .growth-footer-quote {
