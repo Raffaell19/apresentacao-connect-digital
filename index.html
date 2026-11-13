@@ -76,124 +76,239 @@
       </section>
 
       <!-- ======================================================================
-           CENA 1: ALAVANCAGEM & ESTRUTURA ENXUTA (0s - 27s)
+           CENA 1: ALAVANCAGEM & ESTRUTURA ENXUTA (0s - 29.2s)
            ====================================================================== -->
       <section class="scene-panel" id="scene1">
-        <div class="scene-split">
+        <div class="alavancagem-wrapper">
 
-          <div class="scene-col-left">
-            <div class="callout-tag cyan">
-              <span class="tag-pulse"></span>
-              <span>Parceria Comercial Estratégica</span>
+          <!-- Stepper Superior de 3 Etapas Sincronizadas -->
+          <div class="scene-stepper-bar">
+            <div class="stepper-step active" id="stepIndicator1">
+              <span class="step-num">01</span>
+              <span class="step-title">Crescimento Conjunto</span>
             </div>
-
-            <h1 class="motion-title commercial-hero-title">
-              ESTRUTURA ENXUTA &amp; <span class="highlight-cyan">CRESCIMENTO</span>
-            </h1>
-
-            <p class="motion-desc">
-              Nosso compromisso é direto: fazer a sua empresa crescer para crescermos juntos, conquistando o faturamento que é nosso por direito. Através das ferramentas certas de posicionamento e inteligência artificial, colocamos seu negócio diante do cliente ideal com uma estrutura minimalista e inteligente — sem precisar contratar novos funcionários e sem inflar sua folha de pagamento.
-            </p>
-
-            <!-- 4 Pilares da Alavancagem Enxuta -->
-            <div class="niches-mosaic-mini commercial-pillars">
-              <div class="niche-chip active-chip">
-                <span class="niche-icon">🤝</span>
-                <span>Crescimento Conjunto</span>
-              </div>
-              <div class="niche-chip active-chip">
-                <span class="niche-icon">⚡</span>
-                <span>Zero Contratação de Equipe</span>
-              </div>
-              <div class="niche-chip active-chip">
-                <span class="niche-icon">🎯</span>
-                <span>Cliente Ideal no Radar</span>
-              </div>
-              <div class="niche-chip active-chip">
-                <span class="niche-icon">💰</span>
-                <span>Máximo Lucro no Bolso</span>
-              </div>
+            <div class="stepper-step" id="stepIndicator2">
+              <span class="step-num">02</span>
+              <span class="step-title">Ferramentas &amp; I.A.</span>
+            </div>
+            <div class="stepper-step" id="stepIndicator3">
+              <span class="step-num">03</span>
+              <span class="step-title">Zero Funcionários</span>
             </div>
           </div>
 
-          <div class="scene-col-right">
-            <!-- Painel de Alavancagem Operacional & Eficiência Enxuta -->
-            <div class="leak-vs-roi-card leverage-card" id="leakVsRoiCard">
-              <div class="leak-card-header">
-                <div class="leak-header-left">
-                  <span class="dot red"></span>
-                  <span class="dot yellow"></span>
-                  <span class="dot green"></span>
-                  <span class="card-bar-title">Alavancagem: Estrutura Enxuta vs. Faturamento</span>
-                </div>
-                <span class="leak-badge-live cyan-badge">✦ MÁXIMA EFICIÊNCIA</span>
+          <div class="scene-split alavancagem-split">
+
+            <!-- Coluna Esquerda: Narrativa Dinâmica -->
+            <div class="scene-col-left">
+              <div class="callout-tag cyan" id="alavancagemTag">
+                <span class="tag-pulse"></span>
+                <span id="alavancagemTagText">Parceria Comercial Estratégica</span>
               </div>
 
-              <div class="leak-card-body">
-                <!-- Lado A: Modelo Tradicional (Inflar Folha) -->
-                <div class="leak-side danger-side" id="dangerSideBlock">
-                  <div class="side-top-row">
-                    <span class="side-tag text-danger">❌ Inflar Folha de Pagamento</span>
-                    <span class="side-loss-badge">Custo Fixo Alto</span>
-                  </div>
+              <h1 class="motion-title commercial-hero-title" id="alavancagemTitle">
+                CRESCIMENTO CONJUNTO &amp; <span class="highlight-cyan">FATURAMENTO</span>
+              </h1>
 
-                  <div class="leak-metric-box">
-                    <span class="metric-prefix">Risco:</span>
-                    <strong class="metric-val text-danger" id="dangerValDisplay">Alto Custo</strong>
-                    <span class="metric-period">e Encargos</span>
-                  </div>
+              <p class="motion-desc" id="alavancagemDesc">
+                Nosso compromisso é direto: fazer a sua empresa crescer para crescermos juntos, conquistando o faturamento que é nosso por direito.
+              </p>
 
-                  <div class="leak-bar-container">
-                    <div class="leak-bar-fill" id="leakDangerBar" style="width: 80%;"></div>
-                  </div>
-
-                  <ul class="leak-pains-list">
-                    <li><span class="pain-icon">✕</span> Salários pesados, encargos CLT e burocracia</li>
-                    <li><span class="pain-icon">✕</span> Treinamento demorado, faltas e turnover constante</li>
-                    <li><span class="pain-icon">✕</span> Processos manuais lentos que travam a escala</li>
-                  </ul>
+              <!-- Pilares Dinâmicos -->
+              <div class="niches-mosaic-mini commercial-pillars" id="alavancagemPillars">
+                <div class="niche-chip active-chip" id="pillarChip1">
+                  <span class="niche-icon" id="pillarIcon1">🤝</span>
+                  <span id="pillarText1">Alinhamento Total de Interesses</span>
                 </div>
-
-                <!-- Divisor Neon VS -->
-                <div class="leak-divider-col">
-                  <div class="divider-beam"></div>
-                  <span class="vs-glow-pill">VS</span>
-                  <div class="divider-beam"></div>
+                <div class="niche-chip active-chip" id="pillarChip2">
+                  <span class="niche-icon" id="pillarIcon2">📈</span>
+                  <span id="pillarText2">Salto de Faturamento Real</span>
                 </div>
-
-                <!-- Lado B: Ecossistema Enxuto Connect Digital -->
-                <div class="leak-side success-side" id="successSideBlock">
-                  <div class="side-top-row">
-                    <span class="side-tag text-cyan">✦ Ecossistema Connect Digital</span>
-                    <span class="side-gain-badge">Zero Funcionários</span>
-                  </div>
-
-                  <div class="leak-metric-box">
-                    <span class="metric-prefix">Escala:</span>
-                    <strong class="metric-val text-cyan" id="successValDisplay">Máxima</strong>
-                    <span class="metric-period">e Previsível</span>
-                  </div>
-
-                  <div class="leak-bar-container">
-                    <div class="leak-bar-fill success-fill" id="leakSuccessBar" style="width: 95%;"></div>
-                  </div>
-
-                  <ul class="leak-perks-list">
-                    <li><span class="perk-icon">✓</span> Posicionamento no Google &amp; Meta atraindo o cliente ideal</li>
-                    <li><span class="perk-icon">✓</span> Atendimento I.A. 24h qualificando e agendando no WhatsApp</li>
-                    <li><span class="perk-icon">✓</span> Aumento de faturamento sem contratar ninguém</li>
-                  </ul>
-                </div>
-              </div>
-
-              <!-- Rodapé da Proposta -->
-              <div class="leak-card-footer">
-                <span class="footer-alert-icon">💡</span>
-                <span class="footer-alert-text"><strong>Princípio Minimalista:</strong> Menos atrito operacional, zero inchaço de folha e muito mais lucro líquido no seu bolso.</span>
               </div>
             </div>
-          </div>
 
+            <!-- Coluna Direita: O Palco dos 3 Painéis Visuais -->
+            <div class="scene-col-right alavancagem-stage-col">
+
+              <!-- PAINEL 1 (0s - 8.5s): Gráfico de Tração & Faturamento Conjunto -->
+              <div class="leak-vs-roi-card alavancagem-panel active" id="panelGrowth">
+                <div class="leak-card-header">
+                  <div class="leak-header-left">
+                    <span class="dot green"></span>
+                    <span class="card-bar-title">Tração Comercial: Da Estagnação ao Salto de Lucro</span>
+                  </div>
+                  <span class="leak-badge-live cyan-badge">✦ ALINHAMENTO TOTAL</span>
+                </div>
+
+                <div class="growth-chart-body">
+                  <div class="growth-stats-row">
+                    <div class="growth-stat-box current">
+                      <span class="stat-label">Ponto de Partida</span>
+                      <strong class="stat-value text-danger">Estagnação</strong>
+                      <span class="stat-sub">Leads perdidos na mesa</span>
+                    </div>
+                    <div class="growth-arrow-glow">➔</div>
+                    <div class="growth-stat-box target">
+                      <span class="stat-label">Com Connect Digital</span>
+                      <strong class="stat-value text-cyan" id="growthCounterVal">+ R$ 28.400</strong>
+                      <span class="stat-sub">/mês em faturamento novo</span>
+                    </div>
+                  </div>
+
+                  <!-- Gráfico de Curva SVG Animado -->
+                  <div class="growth-svg-container">
+                    <svg class="growth-svg" viewBox="0 0 460 110" fill="none">
+                      <defs>
+                        <linearGradient id="growthGrad" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#00b4ff" stop-opacity="0.3"/>
+                          <stop offset="100%" stop-color="#00b4ff" stop-opacity="0.0"/>
+                        </linearGradient>
+                        <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
+                          <stop offset="0%" stop-color="#EF4444"/>
+                          <stop offset="45%" stop-color="#00b4ff"/>
+                          <stop offset="100%" stop-color="#00ff88"/>
+                        </linearGradient>
+                      </defs>
+                      <path class="growth-area" d="M 20 95 Q 150 90, 240 55 T 440 15 L 440 110 L 20 110 Z" fill="url(#growthGrad)"/>
+                      <path class="growth-line" id="growthSvgLine" d="M 20 95 Q 150 90, 240 55 T 440 15" stroke="url(#lineGrad)" stroke-width="4" stroke-linecap="round"/>
+                      <circle class="growth-point p1" cx="20" cy="95" r="5" fill="#EF4444"/>
+                      <circle class="growth-point p2" cx="240" cy="55" r="5" fill="#00b4ff"/>
+                      <circle class="growth-point p3" cx="440" cy="15" r="7" fill="#00ff88"/>
+                    </svg>
+                    <div class="chart-point-tag" id="chartTargetTag">✦ Escala Acelerada</div>
+                  </div>
+
+                  <div class="growth-footer-quote">
+                    <span>💡 <strong>Meta Clara:</strong> Conquistar a fatia de mercado que é da sua empresa por direito.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PAINEL 2 (8.5s - 18.0s): Ecossistema das Ferramentas no Cliente Ideal -->
+              <div class="leak-vs-roi-card alavancagem-panel" id="panelTools">
+                <div class="leak-card-header">
+                  <div class="leak-header-left">
+                    <span class="dot cyan"></span>
+                    <span class="card-bar-title">Ecossistema: Rota Direta até o Cliente Ideal</span>
+                  </div>
+                  <span class="leak-badge-live cyan-badge">✦ 100% INTEGRADO</span>
+                </div>
+
+                <div class="tools-flow-body">
+                  <div class="tool-flow-card" id="toolCardGoogle">
+                    <div class="tool-icon-wrap">🔍</div>
+                    <div class="tool-info">
+                      <strong>Google Search (Intenção Máxima)</strong>
+                      <span>Coloca sua empresa em 1º para quem digita pronto para comprar no bairro.</span>
+                    </div>
+                    <span class="tool-tag-status">Alta Conversão</span>
+                  </div>
+
+                  <div class="tool-flow-card" id="toolCardMeta">
+                    <div class="tool-icon-wrap">📱</div>
+                    <div class="tool-info">
+                      <strong>Meta Ads (Instagram &amp; Facebook)</strong>
+                      <span>Anúncios visuais magnéticos com fotos reais gerando desejo imediato.</span>
+                    </div>
+                    <span class="tool-tag-status">Desejo Local</span>
+                  </div>
+
+                  <div class="tool-flow-card" id="toolCardWa">
+                    <div class="tool-icon-wrap">🤖</div>
+                    <div class="tool-info">
+                      <strong>I.A. 24h + CRM no WhatsApp</strong>
+                      <span>Atende em 2 segundos, qualifica o lead e agenda sem intervenção manual.</span>
+                    </div>
+                    <span class="tool-tag-status">Resposta em 2s</span>
+                  </div>
+
+                  <div class="tools-center-target">
+                    <span>🎯 <strong>Cliente Ideal Convertido</strong> direto no seu WhatsApp</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- PAINEL 3 (18.0s - 29.0s): Alavancagem Enxuta vs. Inchaço de Folha CLT -->
+              <div class="leak-vs-roi-card alavancagem-panel" id="panelLeverage">
+                <div class="leak-card-header">
+                  <div class="leak-header-left">
+                    <span class="dot red"></span>
+                    <span class="dot yellow"></span>
+                    <span class="dot green"></span>
+                    <span class="card-bar-title">Alavancagem: Estrutura Enxuta vs. Folha Inflada</span>
+                  </div>
+                  <span class="leak-badge-live cyan-badge">✦ ZERO ENCARGOS</span>
+                </div>
+
+                <div class="leak-card-body">
+                  <!-- Lado A: Modelo Tradicional (Inflar Folha) -->
+                  <div class="leak-side danger-side" id="dangerSideBlock">
+                    <div class="side-top-row">
+                      <span class="side-tag text-danger">❌ Inflar Folha de Pagamento</span>
+                      <span class="side-loss-badge">Custo Fixo Alto</span>
+                    </div>
+
+                    <div class="leak-metric-box">
+                      <span class="metric-prefix">Custo CLT:</span>
+                      <strong class="metric-val text-danger" id="dangerValDisplay">- R$ 14.800</strong>
+                      <span class="metric-period">/mês</span>
+                    </div>
+
+                    <div class="leak-bar-container">
+                      <div class="leak-bar-fill" id="leakDangerBar" style="width: 85%;"></div>
+                    </div>
+
+                    <ul class="leak-pains-list">
+                      <li><span class="pain-icon">✕</span> 3 Salários, 13º, férias, FGTS e encargos pesados</li>
+                      <li><span class="pain-icon">✕</span> Treinamento demorado, faltas e turnover constante</li>
+                      <li><span class="pain-icon">✕</span> Processos manuais lentos que travam a escala</li>
+                    </ul>
+
+                    <div class="cost-stamp-avoided">🚫 INCHAÇO EVITADO</div>
+                  </div>
+
+                  <!-- Divisor Neon VS -->
+                  <div class="leak-divider-col">
+                    <div class="divider-beam"></div>
+                    <span class="vs-glow-pill">VS</span>
+                    <div class="divider-beam"></div>
+                  </div>
+
+                  <!-- Lado B: Ecossistema Enxuto Connect Digital -->
+                  <div class="leak-side success-side" id="successSideBlock">
+                    <div class="side-top-row">
+                      <span class="side-tag text-cyan">✦ Ecossistema Connect Digital</span>
+                      <span class="side-gain-badge">Zero Funcionários</span>
+                    </div>
+
+                    <div class="leak-metric-box">
+                      <span class="metric-prefix">Custo Equipe:</span>
+                      <strong class="metric-val text-cyan" id="successValDisplay">R$ 0,00</strong>
+                      <span class="metric-period">em folha</span>
+                    </div>
+
+                    <div class="leak-bar-container">
+                      <div class="leak-bar-fill success-fill" id="leakSuccessBar" style="width: 98%;"></div>
+                    </div>
+
+                    <ul class="leak-perks-list">
+                      <li><span class="perk-icon">✓</span> Escala máxima sem contratar novos funcionários</li>
+                      <li><span class="perk-icon">✓</span> Atendimento I.A. 24h retendo 100% dos leads</li>
+                      <li><span class="perk-icon">✓</span> Máximo lucro líquido retido no seu bolso</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <!-- Rodapé da Proposta -->
+                <div class="leak-card-footer">
+                  <span class="footer-alert-icon">💡</span>
+                  <span class="footer-alert-text"><strong>Princípio Minimalista:</strong> Menos atrito operacional, zero encargos de folha e muito mais lucro líquido no seu bolso.</span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
         </div>
       </section>
 

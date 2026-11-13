@@ -254,83 +254,228 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (sceneNumber === 1) {
-      // 1. Alavancagem Sem Inflar Folha (27.0s)
+      // 1. Alavancagem & Estrutura Enxuta em 3 Atos Sincronizados (29.2s)
       gsap.to('.stage-header', { opacity: 1, duration: 0.35 });
+
+      const step1 = document.getElementById('stepIndicator1');
+      const step2 = document.getElementById('stepIndicator2');
+      const step3 = document.getElementById('stepIndicator3');
+
+      const panel1 = document.getElementById('panelGrowth');
+      const panel2 = document.getElementById('panelTools');
+      const panel3 = document.getElementById('panelLeverage');
+
+      const tagText = document.getElementById('alavancagemTagText');
+      const heroTitle = document.getElementById('alavancagemTitle');
+      const descText = document.getElementById('alavancagemDesc');
+      const pIcon1 = document.getElementById('pillarIcon1');
+      const pText1 = document.getElementById('pillarText1');
+      const pIcon2 = document.getElementById('pillarIcon2');
+      const pText2 = document.getElementById('pillarText2');
+
+      const growthVal = document.getElementById('growthCounterVal');
+      const toolGoogle = document.getElementById('toolCardGoogle');
+      const toolMeta = document.getElementById('toolCardMeta');
+      const toolWa = document.getElementById('toolCardWa');
+
       const dangerBlock = document.getElementById('dangerSideBlock');
       const successBlock = document.getElementById('successSideBlock');
       const dangerBar = document.getElementById('leakDangerBar');
       const successBar = document.getElementById('leakSuccessBar');
 
-      // Reset
+      // Helper para alternar painéis com transição suave
+      function switchPanel(activePanel) {
+        [panel1, panel2, panel3].forEach(p => {
+          if (!p) return;
+          if (p === activePanel) {
+            p.classList.add('active');
+            gsap.fromTo(p, { opacity: 0, y: 15, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power2.out' });
+          } else {
+            p.classList.remove('active');
+          }
+        });
+      }
+
+      function setStepper(activeStep) {
+        [step1, step2, step3].forEach(s => {
+          if (!s) return;
+          if (s === activeStep) s.classList.add('active');
+          else s.classList.remove('active');
+        });
+      }
+
+      // Reset Inicial -> ATO 1
+      setStepper(step1);
+      switchPanel(panel1);
+      if (tagText) tagText.textContent = "Parceria Comercial Estratégica";
+      if (heroTitle) heroTitle.innerHTML = 'CRESCIMENTO CONJUNTO & <span class="highlight-cyan">FATURAMENTO</span>';
+      if (descText) descText.textContent = "Nosso compromisso é direto: fazer a sua empresa crescer para crescermos juntos, conquistando o faturamento que é nosso por direito.";
+      if (pIcon1) pIcon1.textContent = "🤝";
+      if (pText1) pText1.textContent = "Alinhamento Total de Interesses";
+      if (pIcon2) pIcon2.textContent = "📈";
+      if (pText2) pText2.textContent = "Salto de Faturamento Real";
+
+      if (toolGoogle) toolGoogle.classList.remove('highlight');
+      if (toolMeta) toolMeta.classList.remove('highlight');
+      if (toolWa) toolWa.classList.remove('highlight');
+
       if (dangerBlock) dangerBlock.classList.remove('pulse-highlight');
       if (successBlock) successBlock.classList.remove('pulse-highlight');
       if (dangerBar) dangerBar.style.width = '0%';
       if (successBar) successBar.style.width = '0%';
 
-      // Entrada do Card de Alavancagem e dos Pilares
-      gsap.fromTo('#leakVsRoiCard', 
-        { scale: 0.94, opacity: 0, y: 15 }, 
-        { scale: 1, opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
-      );
-      gsap.fromTo('.commercial-pillars .niche-chip', 
-        { y: 15, opacity: 0 }, 
-        { y: 0, opacity: 1, stagger: 0.1, delay: 0.3, ease: 'back.out(1.5)' }
-      );
-
       // Posição inicial da bolinha touch
-      if (virtualCursor) gsap.set(virtualCursor, { x: 140, y: 180, opacity: 0 });
+      if (virtualCursor) gsap.set(virtualCursor, { x: 120, y: 190, opacity: 0 });
 
-      // 1.0s: "...Nosso compromisso é direto..." -> Bolinha touch destaca a Marca / Proposta
+      // Animação da Curva de Crescimento (Ato 1)
+      if (growthVal) {
+        let count = 0;
+        const iv = setInterval(() => {
+          count += 1750;
+          if (count >= 28400) {
+            count = 28400;
+            clearInterval(iv);
+          }
+          growthVal.textContent = "+ R$ " + count.toLocaleString('pt-BR');
+        }, 40);
+      }
+
+      // 1.2s: Bolinha destaca o título do Crescimento
       registerTimeout(() => {
-        moveCursorToElement('.commercial-hero-title', {
-          duration: 1.0,
-          clickAfter: 0.2
+        moveCursorToElement('#alavancagemTitle', {
+          duration: 0.9,
+          clickAfter: 0.15
         });
-      }, 1000);
+      }, 1200);
 
-      // 4.5s: "...fazer a sua empresa crescer para crescermos juntos..." -> Bolinha desliza para os pilares comerciais
+      // 4.5s: "...conquistando o faturamento que é nosso por direito..." -> Bolinha clica no salto do gráfico
       registerTimeout(() => {
-        moveCursorToElement('.commercial-pillars', {
-          offsetX: 70,
-          offsetY: 25,
+        moveCursorToElement('#chartTargetTag', {
           duration: 1.0,
-          clickAfter: 0.2
+          clickAfter: 0.25,
+          onComplete: () => {
+            const tag = document.getElementById('chartTargetTag');
+            if (tag) gsap.to(tag, { scale: 1.15, duration: 0.15, yoyo: true, repeat: 1 });
+          }
         });
       }, 4500);
 
-      // 9.5s: "...colocamos seu negócio diante do cliente ideal..." -> Destaca o chip de cliente ideal
+      // ======================================================================
+      // 8.5s: ATO 2 — FERRAMENTAS CERTAS & CLIENTE IDEAL
+      // "...Através das ferramentas certas de posicionamento e inteligência artificial..."
+      // ======================================================================
       registerTimeout(() => {
-        moveCursorToElement('.commercial-pillars', {
-          offsetX: 70,
-          offsetY: 65,
-          duration: 0.9,
-          clickAfter: 0.2
-        });
-      }, 9500);
+        setStepper(step2);
+        switchPanel(panel2);
+        playPopChime();
 
-      // 15.0s: "...sem precisar contratar novos funcionários e sem inflar sua folha..." -> Bolinha cruza para a máquina enxuta
+        // Transição da coluna esquerda
+        gsap.fromTo(['#alavancagemTag', '#alavancagemTitle', '#alavancagemDesc', '#alavancagemPillars'], 
+          { opacity: 0, y: 8 }, 
+          { opacity: 1, y: 0, duration: 0.35, stagger: 0.06 }
+        );
+
+        if (tagText) tagText.textContent = "Posicionamento Cirúrgico & I.A.";
+        if (heroTitle) heroTitle.innerHTML = 'FERRAMENTAS CERTAS & <span class="highlight-cyan">CLIENTE IDEAL</span>';
+        if (descText) descText.textContent = "Colocamos seu negócio diante do cliente ideal com uma estrutura minimalista e inteligente, unindo Google, redes sociais e I.A. no WhatsApp.";
+        if (pIcon1) pIcon1.textContent = "🎯";
+        if (pText1) pText1.textContent = "Cliente Ideal no Radar";
+        if (pIcon2) pIcon2.textContent = "⚡";
+        if (pText2) pText2.textContent = "100% no Piloto Automático";
+      }, 8500);
+
+      // 10.0s: Bolinha toca na Ferramenta 1 (Google Search)
       registerTimeout(() => {
-        moveCursorToElement('#successSideBlock', {
-          offsetX: 130,
-          offsetY: 60,
-          duration: 1.2,
-          clickAfter: 0.35,
-          onComplete: () => {
-            if (successBlock) successBlock.classList.add('pulse-highlight');
-            if (successBar) successBar.style.width = '95%';
-            if (dangerBar) dangerBar.style.width = '80%';
-          }
+        if (toolGoogle) toolGoogle.classList.add('highlight');
+        moveCursorToElement('#toolCardGoogle', {
+          duration: 0.7,
+          clickAfter: 0.15
+        });
+      }, 10000);
+
+      // 12.5s: Bolinha toca na Ferramenta 2 (Meta Ads)
+      registerTimeout(() => {
+        if (toolMeta) toolMeta.classList.add('highlight');
+        moveCursorToElement('#toolCardMeta', {
+          duration: 0.7,
+          clickAfter: 0.15
+        });
+      }, 12500);
+
+      // 15.0s: Bolinha toca na Ferramenta 3 (I.A. WhatsApp)
+      registerTimeout(() => {
+        if (toolWa) toolWa.classList.add('highlight');
+        moveCursorToElement('#toolCardWa', {
+          duration: 0.7,
+          clickAfter: 0.15
         });
       }, 15000);
 
-      // 22.0s: "...Máxima eficiência, lucro no bolso." -> Pousa no rodapé de conclusão
+      // 16.8s: Bolinha centraliza no Cliente Ideal Convertido
       registerTimeout(() => {
-        moveCursorToElement('.leak-card-footer', {
+        moveCursorToElement('.tools-center-target', {
+          duration: 0.8,
+          clickAfter: 0.2
+        });
+      }, 16800);
+
+      // ======================================================================
+      // 18.0s: ATO 3 — ALAVANCAGEM & ZERO FUNCIONÁRIOS
+      // "...sem precisar contratar novos funcionários e sem inflar sua folha de pagamento..."
+      // ======================================================================
+      registerTimeout(() => {
+        setStepper(step3);
+        switchPanel(panel3);
+        playPopChime();
+
+        // Transição da coluna esquerda
+        gsap.fromTo(['#alavancagemTag', '#alavancagemTitle', '#alavancagemDesc', '#alavancagemPillars'], 
+          { opacity: 0, y: 8 }, 
+          { opacity: 1, y: 0, duration: 0.35, stagger: 0.06 }
+        );
+
+        if (tagText) tagText.textContent = "Máxima Eficiência Operacional";
+        if (heroTitle) heroTitle.innerHTML = 'ESTRUTURA ENXUTA & <span class="highlight-cyan">LUCRO NO BOLSO</span>';
+        if (descText) descText.textContent = "Sem precisar contratar novos funcionários e sem inflar sua folha de pagamento. Menos atrito, máxima eficiência e lucro real retido no seu bolso.";
+        if (pIcon1) pIcon1.textContent = "❌";
+        if (pText1) pText1.textContent = "Zero Custo de Equipe CLT";
+        if (pIcon2) pIcon2.textContent = "💰";
+        if (pText2) pText2.textContent = "Máximo Lucro Líquido";
+
+        if (dangerBlock) dangerBlock.classList.add('pulse-highlight');
+        if (dangerBar) dangerBar.style.width = '85%';
+      }, 18000);
+
+      // 20.0s: Bolinha aponta o risco de folha inflada
+      registerTimeout(() => {
+        moveCursorToElement('#dangerSideBlock', {
+          offsetX: 110,
+          offsetY: 60,
           duration: 0.9,
-          offsetY: 15,
+          clickAfter: 0.2
+        });
+      }, 20000);
+
+      // 23.0s: "...máxima eficiência e lucro real..." -> Bolinha cruza para a estrutura enxuta
+      registerTimeout(() => {
+        if (successBlock) successBlock.classList.add('pulse-highlight');
+        if (successBar) successBar.style.width = '98%';
+        moveCursorToElement('#successSideBlock', {
+          offsetX: 110,
+          offsetY: 60,
+          duration: 1.0,
           clickAfter: 0.25
         });
-      }, 22000);
+      }, 23000);
+
+      // 26.5s: Bolinha pousa no rodapé de conclusão
+      registerTimeout(() => {
+        moveCursorToElement('.leak-card-footer', {
+          duration: 0.8,
+          offsetY: 15,
+          clickAfter: 0.2
+        });
+      }, 26500);
     }
 
     if (sceneNumber === 2) {

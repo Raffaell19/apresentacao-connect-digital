@@ -516,6 +516,294 @@ html, body {
   margin-top: 12px;
 }
 
+/* ==========================================================================
+   CENA 1: REVOX & MOTION SINCRONIZADO EM 3 ATOS (ALAVANCAGEM & TRAÇÃO)
+   ========================================================================== */
+.alavancagem-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.scene-stepper-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.stepper-step {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.stepper-step.active {
+  background: rgba(0, 180, 255, 0.14);
+  border-color: rgba(0, 180, 255, 0.5);
+  box-shadow: 0 0 16px rgba(0, 180, 255, 0.25);
+}
+
+.step-num {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--cyan-neon);
+  background: rgba(0, 180, 255, 0.18);
+  padding: 2px 7px;
+  border-radius: 5px;
+}
+
+.step-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #e2e8f0;
+  letter-spacing: 0.2px;
+}
+
+.alavancagem-stage-col {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+}
+
+.alavancagem-panel {
+  width: 100%;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.alavancagem-panel.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+  z-index: 2;
+  position: relative;
+}
+
+/* Painel 1: Curva de Crescimento & Faturamento */
+.growth-chart-body {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.growth-stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.growth-stat-box {
+  flex: 1;
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+
+.growth-stat-box.target {
+  border-color: rgba(0, 180, 255, 0.45);
+  background: rgba(0, 180, 255, 0.09);
+  box-shadow: 0 0 15px rgba(0, 180, 255, 0.15);
+}
+
+.growth-stat-box .stat-label {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.growth-stat-box .stat-value {
+  font-size: 1.45rem;
+  font-weight: 800;
+  display: block;
+}
+
+.growth-stat-box .stat-sub {
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.growth-arrow-glow {
+  font-size: 1.3rem;
+  color: var(--cyan-neon);
+  font-weight: 800;
+}
+
+.growth-svg-container {
+  position: relative;
+  width: 100%;
+  height: 125px;
+  background: rgba(6, 12, 22, 0.65);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.growth-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.growth-line {
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+  animation: drawGrowthLine 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes drawGrowthLine {
+  to { stroke-dashoffset: 0; }
+}
+
+.chart-point-tag {
+  position: absolute;
+  right: 18px;
+  top: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #00ff88;
+  background: rgba(0, 255, 136, 0.12);
+  border: 1px solid rgba(0, 255, 136, 0.4);
+  border-radius: 20px;
+  padding: 3px 10px;
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.25);
+}
+
+.growth-footer-quote {
+  padding: 9px 12px;
+  background: rgba(0, 180, 255, 0.06);
+  border-left: 3px solid var(--cyan-neon);
+  border-radius: 6px;
+  font-size: 0.78rem;
+  color: #cbd5e1;
+}
+
+/* Painel 2: Ferramentas & Rota do Cliente Ideal */
+.tools-flow-body {
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tool-flow-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 9px 12px;
+  transition: all 0.3s ease;
+}
+
+.tool-flow-card.highlight {
+  border-color: var(--cyan-neon);
+  background: rgba(0, 180, 255, 0.14);
+  box-shadow: 0 0 16px rgba(0, 180, 255, 0.35);
+  transform: translateX(4px);
+}
+
+.tool-icon-wrap {
+  font-size: 1.25rem;
+  min-width: 32px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.tool-info strong {
+  font-size: 0.84rem;
+  color: #ffffff;
+}
+
+.tool-info span {
+  font-size: 0.72rem;
+  color: #94a3b8;
+  line-height: 1.2;
+}
+
+.tool-tag-status {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--cyan-neon);
+  background: rgba(0, 180, 255, 0.15);
+  border: 1px solid rgba(0, 180, 255, 0.35);
+  border-radius: 4px;
+  padding: 3px 8px;
+  white-space: nowrap;
+}
+
+.tools-center-target {
+  margin-top: 4px;
+  padding: 9px 12px;
+  background: linear-gradient(90deg, rgba(0, 180, 255, 0.12), rgba(0, 255, 136, 0.12));
+  border: 1px solid rgba(0, 180, 255, 0.4);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 180, 255, 0.2);
+}
+
+.cost-stamp-avoided {
+  margin-top: 6px;
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #ff4757;
+  border: 1px dashed #ff4757;
+  border-radius: 4px;
+  padding: 3px 8px;
+  letter-spacing: 0.5px;
+  background: rgba(255, 71, 87, 0.12);
+  box-shadow: 0 0 8px rgba(255, 71, 87, 0.25);
+}
+
 @keyframes pulseOpacity {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
