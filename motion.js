@@ -5,48 +5,48 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // Definição das Cenas e Timings (Sincronizado com os áudios humanizados da Francisca Neural)
+  // Definição das Cenas e Timings (Sincronizado com os áudios humanizados da Eric — ElevenLabs)
   const SCENES = [
     {
       id: 0,
       title: "Proposta Comercial",
-      duration: 4.2,
+      duration: 3.0,
       audioId: "audioScene0"
     },
     {
       id: 1,
       title: "Alavancagem & Estrutura Enxuta",
-      duration: 27.0,
+      duration: 29.2,
       audioId: "audioScene1"
     },
     {
       id: 2,
       title: "Google Ads & Intenção Imediata",
-      duration: 13.1,
+      duration: 12.2,
       audioId: "audioScene2"
     },
     {
       id: 3,
       title: "Redes Sociais & Mosaico Multi-Nicho",
-      duration: 12.3,
+      duration: 11.2,
       audioId: "audioScene3"
     },
     {
       id: 4,
       title: "O Destino: Landing Page de Alta Conversão",
-      duration: 14.7,
+      duration: 11.0,
       audioId: "audioScene4"
     },
     {
       id: 5,
       title: "I.A. 24/7 + Chatbot WhatsApp + CRM",
-      duration: 22.1,
+      duration: 16.8,
       audioId: "audioScene5"
     },
     {
       id: 6,
       title: "Connect Digital: Seu Diagnóstico Estratégico",
-      duration: 11.4,
+      duration: 8.2,
       audioId: "audioScene6"
     }
   ];
@@ -480,11 +480,11 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.killTweensOf(lpTrack);
         gsap.set(lpTrack, { y: 0 });
 
-        const lpTl = gsap.timeline({ delay: 0.8 });
-        // Rola revelando Provas Sociais e Abas de Tratamentos (2.2s)
-        lpTl.to(lpTrack, { y: -140, duration: 1.6, ease: 'power2.inOut' }, "+=1.4")
-        // Rola centralizando o Formulário VIP de Alta Conversão na tela (5.0s)
-            .to(lpTrack, { y: -290, duration: 1.8, ease: 'power2.inOut' }, "+=1.4");
+        const lpTl = gsap.timeline({ delay: 0.5 });
+        // Rola revelando Provas Sociais e Abas de Tratamentos (1.0s)
+        lpTl.to(lpTrack, { y: -140, duration: 1.1, ease: 'power2.inOut' }, "+=0.6")
+        // Rola centralizando o Formulário VIP de Alta Conversão na tela (2.5s)
+            .to(lpTrack, { y: -290, duration: 1.2, ease: 'power2.inOut' }, "+=0.6");
       }
 
       // Função de Digitação com Cursor Interativo
@@ -579,11 +579,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           }
         });
-      }, 6400);
+      }, 3200);
     }
 
     if (sceneNumber === 5) {
-      // 5. I.A. 24/7 + CRM (22.1s)
+      // 5. I.A. 24/7 + CRM (16.8s)
       const msgs = ['iaMsg1', 'iaMsg2', 'iaMsg3', 'iaMsg4'];
       msgs.forEach(id => {
         const el = document.getElementById(id);
@@ -596,59 +596,59 @@ document.addEventListener('DOMContentLoaded', () => {
       // Cursor entra no chat do WhatsApp
       registerTimeout(() => {
         moveCursorToElement('.mini-wa-header', {
-          duration: 0.8,
+          duration: 0.6,
           offsetY: 20
         });
-      }, 800);
+      }, 600);
 
-      // 1.5s: Paciente pergunta
+      // 1.0s: Paciente pergunta
       registerTimeout(() => {
         const m1 = document.getElementById('iaMsg1');
         if (m1) { 
           m1.classList.add('show'); 
           playPopChime(); 
-          moveCursorToElement(m1, { duration: 0.5 });
+          moveCursorToElement(m1, { duration: 0.4 });
         }
-      }, 1500);
+      }, 1000);
 
-      // 4.8s: Chatbot I.A. responde tirando dúvidas e propondo horário
+      // 3.4s: Chatbot I.A. responde tirando dúvidas e propondo horário
       registerTimeout(() => {
         const m2 = document.getElementById('iaMsg2');
         if (m2) { 
           m2.classList.add('show'); 
           playPopChime(); 
-          moveCursorToElement(m2, { duration: 0.6 });
+          moveCursorToElement(m2, { duration: 0.5 });
         }
-      }, 4800);
+      }, 3400);
 
-      // 9.2s: Paciente escolhe 15h
+      // 6.8s: Paciente escolhe 15h
       registerTimeout(() => {
         const m3 = document.getElementById('iaMsg3');
         if (m3) { 
           m3.classList.add('show'); 
           playPopChime(); 
-          moveCursorToElement(m3, { duration: 0.5 });
+          moveCursorToElement(m3, { duration: 0.4 });
         }
-      }, 9200);
+      }, 6800);
 
-      // 12.8s: Chatbot I.A. confirma e sincroniza com CRM
+      // 9.8s: Chatbot I.A. confirma e sincroniza com CRM
       registerTimeout(() => {
         const m4 = document.getElementById('iaMsg4');
         if (m4) { 
           m4.classList.add('show'); 
           playPopChime(); 
-          moveCursorToElement(m4, { duration: 0.6 });
+          moveCursorToElement(m4, { duration: 0.5 });
         }
-      }, 12800);
+      }, 9800);
 
-      // 14.5s: Cursor cruza o conector para o CRM
+      // 12.0s: Cursor cruza o conector para o CRM
       registerTimeout(() => {
         moveCursorToElement('.integration-connector', {
-          duration: 0.7
+          duration: 0.6
         });
-      }, 14500);
+      }, 12000);
 
-      // 15.5s: Card entra automaticamente na coluna do CRM com destaque
+      // 13.4s: Card entra automaticamente na coluna do CRM com destaque
       registerTimeout(() => {
         if (crmLiveCard) {
           crmLiveCard.classList.add('show');
@@ -658,29 +658,29 @@ document.addEventListener('DOMContentLoaded', () => {
             { scale: 1, boxShadow: '0 0 25px rgba(0, 180, 255, 0.6)', duration: 0.6, ease: 'back.out(2)' }
           );
           moveCursorToElement(crmLiveCard, {
-            duration: 0.6,
+            duration: 0.5,
             clickAfter: 0.2
           });
         }
-      }, 15500);
+      }, 13400);
     }
 
 
     if (sceneNumber === 6) {
-      // 6. Connect Digital CTA (11.4s)
+      // 6. Connect Digital CTA (8.2s)
       gsap.fromTo('.closing-brand-icon', { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.8, ease: 'back.out(1.8)' });
       gsap.fromTo('.btn-cta-motion', { scale: 0.9, opacity: 0 }, { scale: 1, opacity: 1, delay: 0.4, duration: 0.6, ease: 'back.out(2)' });
 
       registerTimeout(() => {
         moveCursorToElement('.btn-cta-motion', {
           duration: 1.0,
-          clickAfter: 0.4,
+          clickAfter: 0.35,
           onComplete: () => {
             const btn = document.querySelector('.btn-cta-motion');
             if (btn) gsap.to(btn, { scale: 1.05, duration: 0.15, yoyo: true, repeat: 1 });
           }
         });
-      }, 2000);
+      }, 1500);
     }
   }
 
