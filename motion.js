@@ -283,15 +283,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const dangerBar = document.getElementById('leakDangerBar');
       const successBar = document.getElementById('leakSuccessBar');
 
-      // Helper para alternar painéis com transição suave
+      // Helper para alternar painéis sem qualquer sobreposição
       function switchPanel(activePanel) {
         [panel1, panel2, panel3].forEach(p => {
           if (!p) return;
           if (p === activePanel) {
             p.classList.add('active');
-            gsap.fromTo(p, { opacity: 0, y: 15, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: 'power2.out' });
+            gsap.fromTo(p, { opacity: 0, y: 10, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: 'power2.out' });
           } else {
             p.classList.remove('active');
+            gsap.set(p, { opacity: 0 });
           }
         });
       }
