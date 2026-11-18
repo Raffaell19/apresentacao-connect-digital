@@ -31,7 +31,9 @@
   --radius-xl: 24px;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -49,7 +51,7 @@ body {
   line-height: 1.5;
   min-height: 100vh;
   overflow-x: hidden;
-  background-image: 
+  background-image:
     radial-gradient(circle at 50% 0%, rgba(0, 180, 255, 0.15) 0%, transparent 60%),
     radial-gradient(circle at 10% 40%, rgba(0, 255, 136, 0.06) 0%, transparent 50%),
     radial-gradient(circle at 90% 70%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
@@ -157,8 +159,17 @@ a {
 }
 
 @keyframes pulseDot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
 }
 
 .btn-header-back {
@@ -674,8 +685,15 @@ a {
 }
 
 @keyframes pulseButton {
-  0%, 100% { box-shadow: 0 0 22px rgba(0, 180, 255, 0.5), 0 8px 20px rgba(0, 255, 136, 0.3); }
-  50% { box-shadow: 0 0 35px rgba(0, 180, 255, 0.75), 0 12px 28px rgba(0, 255, 136, 0.5); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 22px rgba(0, 180, 255, 0.5), 0 8px 20px rgba(0, 255, 136, 0.3);
+  }
+
+  50% {
+    box-shadow: 0 0 35px rgba(0, 180, 255, 0.75), 0 12px 28px rgba(0, 255, 136, 0.5);
+  }
 }
 
 /* ==========================================================================
@@ -964,7 +982,8 @@ a {
 
   .pricing-card.featured-card {
     transform: none;
-    order: -1; /* Coloca a opção do meio em primeiro no celular */
+    order: -1;
+    /* Coloca a opção do meio em primeiro no celular */
   }
 
   .pricing-card.featured-card:hover {
@@ -977,7 +996,8 @@ a {
     text-align: center;
   }
 
-  .anchor-col-danger, .anchor-col-success {
+  .anchor-col-danger,
+  .anchor-col-success {
     text-align: center;
     border-left: none;
     padding-left: 0;
