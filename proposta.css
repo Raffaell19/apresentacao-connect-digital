@@ -241,7 +241,7 @@ a {
 /* Banner de Ancoragem Psicológica (Choque de Custos CLT vs. Connect Digital) */
 .anchoring-banner {
   max-width: 960px;
-  margin: 0 auto 52px;
+  margin: 0 auto 36px;
   background: rgba(10, 18, 32, 0.85);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-lg);
@@ -251,6 +251,104 @@ a {
   align-items: center;
   gap: 16px;
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+/* Banner de Alinhamento: Diretriz de Contrato Mínimo de 3 Meses */
+.contract-rule-banner {
+  max-width: 960px;
+  margin: 0 auto 48px;
+  background: linear-gradient(135deg, rgba(0, 180, 255, 0.08) 0%, rgba(0, 255, 136, 0.05) 100%);
+  border: 1px solid rgba(0, 180, 255, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.contract-rule-icon {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 12px;
+  background: rgba(0, 180, 255, 0.15);
+  border: 1px solid rgba(0, 180, 255, 0.4);
+  color: var(--cyan-neon);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contract-rule-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.contract-rule-content {
+  flex: 1;
+}
+
+.contract-rule-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.contract-rule-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--emerald-neon);
+  background: rgba(0, 255, 136, 0.12);
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.contract-rule-header h4 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+}
+
+.contract-rule-content p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.contract-rule-content strong {
+  color: #ffffff;
+}
+
+/* Badge de Contrato Mínimo no Card */
+.plan-contract-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+}
+
+.plan-contract-badge.featured-badge {
+  background: rgba(0, 180, 255, 0.12);
+  border-color: rgba(0, 180, 255, 0.35);
+  color: var(--cyan-neon);
+  box-shadow: 0 0 12px rgba(0, 180, 255, 0.2);
 }
 
 .anchor-col-danger {
